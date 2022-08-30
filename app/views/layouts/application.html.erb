@@ -6,11 +6,24 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <% if user_signed_in? %>
+        <p>ようこそ、<%= current_user.name %>さん!</p>
+        <P><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></P>
+      <% else %>
+        <p><%= link_to "新規登録", new_user_registration_path %></p>
+        <p><%= link_to "ログイン", new_user_session_path %></p>
+      <% end %>
+    </header>
+    <main>
+      <p></p>
+      <%= yield %>
+    </main>
   </body>
 </html>

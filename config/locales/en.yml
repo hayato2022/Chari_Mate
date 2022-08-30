@@ -31,3 +31,8 @@
 
 en:
   hello: "Hello world"
+
+ja:
+  time:
+    formats:
+      default: "%Y年%m月%d日"

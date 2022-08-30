@@ -1,29 +1,38 @@
-<h2>Sign up</h2>
+<h3>新規登録</h3>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user' do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :name, "ユーザー名(＊必須)" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email, "メールアドレス(＊必須)" %>
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :password, "パスワード(＊必須)" %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
+      <p>(<%= @minimum_password_length %>文字以上)</p>
+    <% end %>
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation, "パスワード(確認用)" %>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "登録する", class: "btn btn-success" %>
   </div>
 <% end %>
 
-<%= render "public/shared/links" %>
+<h3>ゲストログインの方</h3>
+<p><%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, method: :post %></p>
+
+<h3>既に登録済みの方</h3>
+<p><%= link_to "こちら", new_user_session_path %>からログイン</p>
