@@ -27,7 +27,9 @@
   </div>
   <div class="row">
     <% @posts.each do |post| %>
-      <%= image_tag post.get_image(300,250) %>
+      <%= link_to post_path(@post.id) do %>
+        <%= image_tag post.get_image(300,250) %>
+      <% end %>
     <% end %>
   </div>
 </div>

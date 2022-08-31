@@ -1,16 +1,5 @@
 Rails.application.routes.draw do
 
-  
-  namespace :public do
-    get 'homes/top'
-    get 'homes/about'
-  end
-  namespace :public do
-    get 'posts/new'
-    get 'posts/index'
-    get 'posts/show'
-    get 'posts/edit'
-  end
   # ユーザー側
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",

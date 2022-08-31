@@ -3,7 +3,8 @@ class Post < ApplicationRecord
   # has_one_attached :video
   belongs_to :user
   has_many :post_tags, dependent: :destroy
-  has_many :tags, through: :post_tags
+  has_many :tags, through: :post_tags, dependent: :destroy
+  has_many :post_comments, dependent: :destroy
 
   def save_tag(sent_tags)
     # タグが存在していれば、タグの名前を配列として取得
