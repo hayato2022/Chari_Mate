@@ -35,4 +35,5 @@ en:
 ja:
   time:
     formats:
-      default: "%Y年%m月%d日"
+      default: "%Y/%m/%d %H:%M:%S"
+      short: "%Y年%m月%d日"

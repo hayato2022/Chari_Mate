@@ -1,4 +1,5 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_user!
   def new
     @post = Post.new
   end
@@ -34,6 +35,7 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @post_tags = @post.tags
+    @post_comment = PostComment.new
   end
 
   def search

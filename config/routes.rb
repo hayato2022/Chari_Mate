@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
     get "/about" => "homes#about"
-    resources :posts
+    resources :posts do
+      resources :post_comments, only: [:create, :destroy]
+    end
     get "users/unsubscribe" => "users#unsubscribe"
     patch "users/withdrawal" => "users#withdrawal"
     resources :users, only: [:show, :edit, :update]
@@ -29,8 +31,8 @@ Rails.application.routes.draw do
       get 'posts', to: 'posts#search'
     end
   end
-  
-  #管理者側 
+
+  #管理者側
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: 'admin/sessions'
   }

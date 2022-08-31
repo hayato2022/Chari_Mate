@@ -20,7 +20,7 @@
 </div>
 
 <div class="row">
-  <p><%= l @post.created_at %></p>
+  <p><%= l @post.created_at, format: :short %></p>
 </div>
 
 <div class="row">
@@ -29,6 +29,7 @@
   </div>
   <div class="col">
     <!--コメント数-->
+    <p>コメント<%= @post.post_comments.count %>件</p>
   </div>
 </div>
 
@@ -41,5 +42,27 @@
     <%= link_to posts_path(tag_id: tag.id) do %>
       <%= tag.name %>
     <% end %>
+  <% end %>
+</div>
+
+<div class="row">
+  <!--撮影場所-->
+</div>
+
+<div class="row">
+  <% @post.post_comments.each do |post_comment| %>
+    <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
+    <%= post_comment.user.name %>
+    <%= l post_comment.created_at %><%= post_comment.comment %>
+    <% if post_comment.user.id == current_user.id %>
+      <%= link_to "削除", post_post_comment_path(@post, post_comment), method: :delete, data: {confirm: '本当に削除しますか'}, class: "btn btn-danger" %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="row">
+  <%= form_with model: [@post, @post_comment] do |f| %>
+    <%= f.text_area :comment, rows: '5',placeholder: "コメントをここに" %>
+    <%= f.submit "送信" %>
   <% end %>
 </div>
