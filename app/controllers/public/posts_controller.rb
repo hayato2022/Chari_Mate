@@ -23,8 +23,10 @@ class Public::PostsController < ApplicationController
     if params[:tag_id]
       @tag = Tag.find(params[:tag_id])
       @posts = @tag.posts.all
+      @post_name = @tag.name
     else
       @posts = Post.all
+      @post_name = "みんな"
     end
 
   end
