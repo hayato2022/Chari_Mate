@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     root to: "homes#top"
     get "/about" => "homes#about"
     resources :posts do
+      # いいね機能のidはurlに含まなくていいため、resourceを使用
+      resource :likes, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
     end
     get "users/unsubscribe" => "users#unsubscribe"
@@ -27,9 +29,9 @@ Rails.application.routes.draw do
 
 
     #タグによって絞り込んだ投稿を表示するアクションへのルーティング
-    resources :tags do
-      get 'posts', to: 'posts#search'
-    end
+    # resources :tags do
+    #   get 'posts', to: 'posts#search'
+    # end
   end
 
   #管理者側
