@@ -1,16 +1,15 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :sent_user, only: [:show, :edit, :update]
   def show
-    @user = User.find(params[:id])
     @posts = @user.posts
   end
 
   def edit
-    @user = User.find(params[:id])
+
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to user_path(@user.id)
     else
@@ -30,6 +29,10 @@ class Public::UsersController < ApplicationController
   end
 
   private
+
+  def sent_user
+    @user = User.find(params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:name, :email, :introduction, :profile_image)
