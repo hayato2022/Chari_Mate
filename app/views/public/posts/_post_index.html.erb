@@ -1,0 +1,42 @@
+<% posts.each do |post| %>
+  <div class="row">
+    <div class="col">
+       <!--プロフィール画像-->
+       <%= image_tag post.user.get_profile_image(100,100) %>
+    </div>
+    <div class="col">
+      <p><%= post.user.name %></p>
+    </div>
+    <div class="row">
+      <%= link_to post_path(post.id) do %>
+        <%= image_tag post.get_image(350,300) %>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="col">
+        <!--いいね数-->
+        <% if post.liked_by?(current_user) %>
+          <p>
+            <%= link_to post_likes_path(post), method: :delete, class: "text-dark" do %>
+              <i class="fas fa-heart"></i><%= post.likes.count %>いいね
+            <% end %>
+          </p>
+        <% else %>
+          <p>
+            <%= link_to post_likes_path(post), method: :post, class: "text-dark" do %>
+              <i class="far fa-heart"></i><%= post.likes.count %>いいね
+            <% end %>
+          </p>
+        <% end %>
+      </div>
+      <div class="col">
+        <!--コメント-->
+        <p>コメント<%= post.post_comments.count %>件</p>
+      </div>
+      <div class="row">
+        <%= post.body %>
+      </div>
+
+    </div>
+  </div>
+  <% end %>

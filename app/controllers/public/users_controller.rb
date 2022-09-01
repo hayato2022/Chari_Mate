@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :sent_user, only: [:show, :edit, :update]
+  before_action :sent_user, only: [:show, :edit, :update, :likes]
   def show
     @posts = @user.posts
   end
@@ -15,6 +15,11 @@ class Public::UsersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def likes
+    likes = Like.where(user_id: @user.id).pluck(:post_id)
+    @like_posts = Post.find(likes)
   end
 
   def unsubscribe

@@ -25,8 +25,11 @@ Rails.application.routes.draw do
     end
     get "users/unsubscribe" => "users#unsubscribe"
     patch "users/withdrawal" => "users#withdrawal"
-    resources :users, only: [:show, :edit, :update]
-
+    resources :users, only: [:show, :edit, :update] do
+      member do
+        get :likes
+      end
+    end
 
     #タグによって絞り込んだ投稿を表示するアクションへのルーティング
     # resources :tags do

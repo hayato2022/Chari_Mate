@@ -28,14 +28,14 @@
     <!--いいね数-->
     <% if @post.liked_by?(current_user) %>
       <p>
-        <%= link_to post_likes_path(@post), method: :delete do %>
-          ♥<%= @post.likes.count %>いいね
+        <%= link_to post_likes_path(@post), method: :delete, class: "text-dark" do %>
+          <i class="fas fa-heart"></i><%= @post.likes.count %>いいね
         <% end %>
       </p>
     <% else %>
       <p>
-        <%= link_to post_likes_path(@post), method: :post do %>
-          ♡<%= @post.likes.count %>いいね
+        <%= link_to post_likes_path(@post), method: :post, class: "text-dark" do %>
+          <i class="far fa-heart"></i><%= @post.likes.count %>いいね
         <% end %>
       </p>
     <% end %>
