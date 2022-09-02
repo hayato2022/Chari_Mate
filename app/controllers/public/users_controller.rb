@@ -1,6 +1,11 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :sent_user, only: [:show, :edit, :update, :likes]
+
+  def index
+    @users = User.all
+  end
+
   def show
     @posts = @user.posts
   end

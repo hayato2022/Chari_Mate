@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     end
     get "users/unsubscribe" => "users#unsubscribe"
     patch "users/withdrawal" => "users#withdrawal"
-    resources :users, only: [:show, :edit, :update] do
+    resources :users, only: [:index, :show, :edit, :update] do
       member do
         get :likes
       end

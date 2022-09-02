@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <!--サイドバー-->
+    </div>
+    <div class="col-md-9">
+      <div class="row">
+        <!--ユーザー検索-->
+      </div>
+      <div class="row">
+        <table class="table table-hover">
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td>
+                  <%= link_to user_path(user.id), class: "text-dark" do %>
+                    <%= image_tag user.get_profile_image(100,100) %> <%= user.name %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

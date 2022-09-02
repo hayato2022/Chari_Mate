@@ -4,11 +4,21 @@
   </div>
 
   <div class="row">
-    <% @tag_list.each do |tag| %>
-      <%= link_to posts_path(tag_id: tag.id) do %>
-        <%= tag.name %>
-      <% end %>
-    <% end %>
+    <div class="col">
+        <table class="table table-responsive">
+          <tbody>
+              <tr>
+                <% @tag_list.each do |tag| %>
+                <td>
+                  <%= link_to posts_path(tag_id: tag.id), class: "text-dark" do %>
+                    <%= tag.name %>
+                  <% end %>
+                </td>
+                <% end %>
+              </tr>
+          </tbody>
+        </table>
+    </div>
   </div>
   <!--投稿の一覧表示の部分テンプレート-->
   <%= render 'post_index', posts: @posts %>
