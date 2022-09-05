@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'relationships/followings'
+    get 'relationships/followers'
+  end
   # ユーザー側
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
