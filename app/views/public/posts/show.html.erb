@@ -4,14 +4,18 @@
       <!--プロフィール画像-->
     </div>
     <div class="col">
-      <%= @post.user.name %>
+      <%= link_to user_path(@post.user.id), class: "text-dark" do %>
+        <%= @post.user.name %>
+      <% end %>
     </div>
+    <% if @post.user.id == current_user.id %>
     <div class="col">
       <%= link_to "編集する", edit_post_path(@post.id), class: "btn btn-success" %>
     </div>
     <div class="col">
       <%= link_to "削除する", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
     </div>
+    <% end %>
   </div>
 </div>
 
