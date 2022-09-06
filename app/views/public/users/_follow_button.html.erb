@@ -1,0 +1,13 @@
+<% unless current_user == user %>
+  <% if current_user.following?(user) %>
+    <%= form_with model: user, url: user_relationship_path(user.id), method: :delete do |f| %>
+      <%= f.hidden_field :followed_id, value: user.id %>
+      <%= f.submit 'フォローを外す', class: "btn btn-outline-secondary" %>
+    <% end %>
+  <% else %>
+    <%= form_with model: user, url: user_relationships_path(user.id), method: :post do |f| %>
+      <%= f.hidden_field :followed_id, value: user.id %>
+      <%= f.submit 'フォローする', class: "btn btn-primary" %>
+    <% end %>
+  <% end %>
+<% end %>

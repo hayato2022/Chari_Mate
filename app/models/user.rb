@@ -8,16 +8,15 @@ class User < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-  # フォローした、フォローされたの関係
+
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  # reverse_of_relationshipsは、わかりにくいため名前をつけているだけ
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
-  # 一覧画面で使用
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
   # フォローした時の処理
   def follow(user_id)
+ 
     relationships.create(followed_id: user_id)
   end
 
