@@ -11,7 +11,6 @@ class Post < ApplicationRecord
     likes.exists?(user_id: user.id)
   end
 
-
   def save_tag(sent_tags)
     # タグが存在していれば、タグの名前を配列として取得
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
@@ -29,6 +28,8 @@ class Post < ApplicationRecord
       self.tags << new_post_tag
     end
   end
+
+  
 
   def get_image(width, height)
    unless image.attached?

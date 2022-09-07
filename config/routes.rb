@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :public do
-    get 'relationships/followings'
-    get 'relationships/followers'
-  end
   # ユーザー側
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
@@ -37,11 +33,8 @@ Rails.application.routes.draw do
         get :likes
       end
     end
-
-    #タグによって絞り込んだ投稿を表示するアクションへのルーティング
-    # resources :tags do
-    #   get 'posts', to: 'posts#search'
-    # end
+    # 検索機能
+    get "search" => "searches#search"
   end
 
   #管理者側

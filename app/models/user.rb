@@ -4,6 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one_attached :profile_image
+  validates :name, presence: true
+  validates :email, presence: true, uniqueness: true
+
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -30,10 +34,18 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
-  has_one_attached :profile_image
+  # 検索方法分岐
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @user = User.where("name LIKE?", "#{word}")
+    elsif search == "partial_match"
+      @user = User.where("name LIKE?","%#{word}%")
+    else
+      @user = User.all
+    end
+  end
 
-  validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
+
 
   # ゲストログイン機能
   def self.guest

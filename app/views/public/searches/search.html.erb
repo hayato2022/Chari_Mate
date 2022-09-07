@@ -1,0 +1,15 @@
+<h4>検索結果</h4>
+
+<table class="table table-hover table-inverse">
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <%= link_to user_path(user.id), class: "text-dark" do %>
+            <td><%= image_tag user.get_profile_image(100,100) %></td>
+            <td><%= user.name %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+</table>
