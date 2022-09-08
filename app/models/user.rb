@@ -34,18 +34,14 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
-  # 検索方法分岐
-  def self.looks(search, word)
-    if search == "perfect_match"
-      @user = User.where("name LIKE?", "#{word}")
-    elsif search == "partial_match"
-      @user = User.where("name LIKE?","%#{word}%")
+  # ユーザー検索
+  def self.search(keyword)
+    if search
+      User.where(['name LIKE ?', "%#{keyword}%"])
     else
-      @user = User.all
+      User.all
     end
   end
-
-
 
   # ゲストログイン機能
   def self.guest

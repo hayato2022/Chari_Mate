@@ -2,10 +2,6 @@ class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :sent_user, only: [:show, :edit, :update, :likes]
 
-  def index
-    @users = User.all
-  end
-
   def show
     @posts = @user.posts
   end
@@ -36,9 +32,13 @@ class Public::UsersController < ApplicationController
     reset_session
     redirect_to root_path
   end
-  
+
   def search
-    
+    if params[:name].present?
+      @users = User.where('name LIKE ?', "%#{params[:name]}%")
+    else
+      @users = User.all
+    end
   end
 
   private

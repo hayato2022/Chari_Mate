@@ -11,6 +11,14 @@
       </tr>
       <tr>
         <td>
+          <%= link_to search_users_path, class: "text-dark" do %>
+            <i class="fas fa-search"></i></br>
+            <p>ユーザー検索</p>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <%= link_to new_post_path, class: "text-dark" do %>
             <i class="fas fa-camera"></i></br>
             <p>投稿する</p>
