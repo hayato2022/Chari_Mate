@@ -1,8 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
-      <!--サイドバー-->
-    </div>
+    <%= render "posts/sidebar" %>
     <div class="col-md-9">
       <div class="row">
         <% if user_signed_in? %>

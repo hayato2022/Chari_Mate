@@ -1,8 +1,9 @@
 <div class="container">
   <div class="row">
+    <%= render "sidebar" %>
+  <div class="row">
     <h3><%= @post_name %>の投稿一覧</h3>
   </div>
-
   <div class="row">
     <div class="col">
         <table class="table table-responsive">
@@ -22,6 +23,7 @@
   </div>
   <!--投稿の一覧表示の部分テンプレート-->
   <%= render 'post_index', posts: @posts %>
+  </div>
 </div>
 
 

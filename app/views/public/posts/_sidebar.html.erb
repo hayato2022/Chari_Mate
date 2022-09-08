@@ -1,0 +1,30 @@
+<div class="col-md-3">
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>
+          <%= link_to posts_path, class: "text-dark" do %>
+            <i class="fas fa-home"></i></br>
+            <p>投稿一覧</p>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= link_to new_post_path, class: "text-dark" do %>
+            <i class="fas fa-camera"></i></br>
+            <p>投稿する</p>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= link_to likes_user_path(current_user), class: "text-dark" do %>
+            <i class="fas fa-heart"></i></br>
+            <p>いいねした投稿</p>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -11,7 +11,6 @@ class Public::UsersController < ApplicationController
   end
 
   def edit
-
   end
 
   def update
@@ -36,6 +35,10 @@ class Public::UsersController < ApplicationController
     @user.update(is_active: false)
     reset_session
     redirect_to root_path
+  end
+  
+  def search
+    
   end
 
   private

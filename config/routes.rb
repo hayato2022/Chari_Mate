@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     get "users/unsubscribe" => "users#unsubscribe"
     patch "users/withdrawal" => "users#withdrawal"
     resources :users, only: [:index, :show, :edit, :update] do
+      get :search, on: :collection
       resource :relationships , only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
@@ -33,8 +34,7 @@ Rails.application.routes.draw do
         get :likes
       end
     end
-    # 検索機能
-    get "search" => "searches#search"
+
   end
 
   #管理者側
