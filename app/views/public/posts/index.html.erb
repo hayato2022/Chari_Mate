@@ -1,14 +1,11 @@
 <div class="container">
   <div class="row">
-    <%= render "sidebar" %>
-  <div class="row">
-    <h3><%= @post_name %>の投稿一覧</h3>
-  </div>
-  <div class="row">
-    <div class="col">
-        <table class="table table-responsive">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-center">
+      <table class="table table-responsive">
           <tbody>
               <tr>
+                <td>タグリスト</td>
                 <% @tag_list.each do |tag| %>
                 <td>
                   <%= link_to posts_path(tag_id: tag.id), class: "text-dark" do %>
@@ -20,10 +17,122 @@
           </tbody>
         </table>
     </div>
+    <div class="col-md-4"></div>
   </div>
-  <!--投稿の一覧表示の部分テンプレート-->
-  <%= render 'post_index', posts: @posts %>
+  <div class="row">
+    <div class="col-md-2 text-center">
+      <%= render "sidebar" %>
+    </div>
+    <div class="col-md-3 ml-3">
+      <div class="row">
+        <div class="col">
+          <h3><%= @post_name %>の投稿一覧</h3>
+        </div>
+        <div class="row">
+          <% @posts.each do |post| %>
+            <div class="col">
+              <%= link_to user_path(post.user.id), class: "text-dark" do %>
+                <%= image_tag post.user.get_profile_image(100,100) %>
+                <%= post.user.name %>
+              <% end %>
+            </div>
+            <div class="row">
+              <div class="col">
+                <%= link_to post_path(post.id) do %>
+                  <%= image_tag post.get_image(350,300) %>
+                <% end %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <!--いいね数-->
+                <% if post.liked_by?(current_user) %>
+                  <p>
+                    <%= link_to post_likes_path(post), method: :delete, class: "text-dark" do %>
+                      <i class="fas fa-heart"></i><%= post.likes.count %>いいね
+                    <% end %>
+                  </p>
+                <% else %>
+                  <p>
+                    <%= link_to post_likes_path(post), method: :post, class: "text-dark" do %>
+                      <i class="far fa-heart"></i><%= post.likes.count %>いいね
+                    <% end %>
+                  </p>
+                <% end %>
+              </div>
+              <div class="col">
+                  <!--コメント-->
+                  <p>コメント<%= post.post_comments.count %>件</p>
+                </div>
+              <div class="row">
+                <p><%= post.body %></p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div id='map'></div>
+
+        <style>
+          #map {
+            height: 600px;
+            width: 100%;
+          }
+        </style>
+
+        <!-- js部分 -->
+        <script>
+            function initMap() {
+
+              //初期表示位置
+              let latlng = new google.maps.LatLng(38.60, 139.5);
+              //デザイン
+              let styles = [
+                   {
+                    stylers: [
+                     { "saturation": 0 },
+                     { "lightness": 0 }
+                    ]
+                   }
+                  ];
+
+              let map = new google.maps.Map(document.getElementById('map'), {
+                  zoom: 5.5,
+                  styles: styles,
+                  center: latlng
+              });
+              let transitLayer = new google.maps.TransitLayer();
+              transitLayer.setMap(map);
+
+              //複数マーカー ここから
+              <% @posts.each do |post|%>
+                ( function() {
+                  let markerLatLng = new google.maps.LatLng({lat: <%= post.lat %>, lng: <%= post.lng %>}); // 緯度経度のデータ作成
+                  let marker = new google.maps.Marker({
+                    position: markerLatLng,
+                    map: map
+                  });
+            　　　//マーカーをクリックしたとき、詳細情報を表示
+                  let infowindow = new google.maps.InfoWindow({
+                    position: markerLatLng,
+                    content: "<a href='<%= post_url(post.id) %>' target='_blank'><%= post.body %></a>"
+                  }); //ここで詳細ページへのリンクを表示させる
+                  marker.addListener('click', function() {
+                    infowindow.open(map, marker);
+                  });
+
+               })();
+              <% end %>
+              //複数マーカー ここまで
+          }
+        </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=YOURAPIKEY&callback=initMap" async defer></script>
+      </div>
+    </div>
   </div>
 </div>
+
 
 

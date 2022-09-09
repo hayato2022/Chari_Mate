@@ -7,86 +7,108 @@
     </div>
   </div>
   <div class="row">
-    <div class="col">
-      <!--プロフィール画像-->
+    <div class="col-md-2">
+      <%= render 'sidebar' %>
     </div>
-    <div class="col">
-      <%= link_to user_path(@post.user.id), class: "text-dark" do %>
-        <%= @post.user.name %>
+    <div class="col-md-1"></div>
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-2">
+          <%= link_to user_path(@post.user.id), class: "text-dark" do %>
+            <%= image_tag @post.user.get_profile_image(100,100) %>
+            <%= @post.user.name %>
+          <% end %>
+        </div>
+        <div class="col-md-3"></div>
+        <% if @post.user.id == current_user.id %>
+        <div class="col-md-2">
+          <%= link_to "編集する", edit_post_path(@post.id), class: "btn btn-success" %>
+        </div>
+        <div class="col-md-2">
+          <%= link_to "削除する", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+        </div>
+        <% end %>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%= image_tag @post.get_image(700,400) %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <p><%= l @post.created_at, format: :short %></p>
+        </div>
+        <div class="col-md-7"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <!--いいね数-->
+          <% if @post.liked_by?(current_user) %>
+            <p>
+              <%= link_to post_likes_path(@post), method: :delete, class: "text-dark" do %>
+                <i class="fas fa-heart"></i><%= @post.likes.count %>いいね
+              <% end %>
+            </p>
+          <% else %>
+            <p>
+              <%= link_to post_likes_path(@post), method: :post, class: "text-dark" do %>
+                <i class="far fa-heart"></i><%= @post.likes.count %>いいね
+              <% end %>
+            </p>
+          <% end %>
+        </div>
+        <div class="col-md-2">
+          <!--コメント数-->
+          <p>コメント<%= @post.post_comments.count %>件</p>
+        </div>
+        <div class="col-md-5"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-9">
+          <p><%= @post.body %></p>
+        </div>
+      </div>
+      <div class="row">
+        <% @post_tags.each do |tag| %>
+          <div class="col">
+            <%= link_to posts_path(tag_id: tag.id) do %>
+              <%= tag.name %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div class="row">
+        <!--撮影場所-->
+      </div>
+      <div class="row">
+        <%= form_with model: [@post, @post_comment] do |f| %>
+          <%= f.text_area :comment, rows: '5',placeholder: "コメントをここに" %>
+          <%= f.submit "送信" %>
+        <% end %>
+      </div>
+      <% @post.post_comments.each do |post_comment| %>
+        <div class="row">
+            <div class="col">
+              <%= image_tag post_comment.user.get_profile_image(100,100) %>
+            </div>
+            <div class="col">
+              <%= post_comment.user.name %>
+            </div>
+            <div class="col">
+              <%= l post_comment.created_at %>
+            </div>
+        </div>
+      <div class="row">
+        <div class="col">
+          <p><%= post_comment.comment %></p>
+        </div>
+        <div class="col">
+          <% if post_comment.user.id == current_user.id %>
+            <%= link_to "削除", post_post_comment_path(@post, post_comment), method: :delete, data: {confirm: '本当に削除しますか'}, class: "btn btn-danger" %>
+          <% end %>
+        </div>
+      </div>
       <% end %>
     </div>
-    <% if @post.user.id == current_user.id %>
-    <div class="col">
-      <%= link_to "編集する", edit_post_path(@post.id), class: "btn btn-success" %>
-    </div>
-    <div class="col">
-      <%= link_to "削除する", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
-    </div>
-    <% end %>
   </div>
-</div>
-
-<div class="row">
-  <%= image_tag @post.get_image(700,400) %>
-</div>
-
-<div class="row">
-  <p><%= l @post.created_at, format: :short %></p>
-</div>
-
-<div class="row">
-  <div class="col">
-    <!--いいね数-->
-    <% if @post.liked_by?(current_user) %>
-      <p>
-        <%= link_to post_likes_path(@post), method: :delete, class: "text-dark" do %>
-          <i class="fas fa-heart"></i><%= @post.likes.count %>いいね
-        <% end %>
-      </p>
-    <% else %>
-      <p>
-        <%= link_to post_likes_path(@post), method: :post, class: "text-dark" do %>
-          <i class="far fa-heart"></i><%= @post.likes.count %>いいね
-        <% end %>
-      </p>
-    <% end %>
-  </div>
-  <div class="col">
-    <!--コメント数-->
-    <p>コメント<%= @post.post_comments.count %>件</p>
-  </div>
-</div>
-
-<div class="row">
-  <p><%= @post.body %></p>
-</div>
-
-<div class="row">
-  <% @post_tags.each do |tag| %>
-    <%= link_to posts_path(tag_id: tag.id) do %>
-      <%= tag.name %>
-    <% end %>
-  <% end %>
-</div>
-
-<div class="row">
-  <!--撮影場所-->
-</div>
-
-<div class="row">
-  <% @post.post_comments.each do |post_comment| %>
-    <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
-    <%= post_comment.user.name %>
-    <%= l post_comment.created_at %><%= post_comment.comment %>
-    <% if post_comment.user.id == current_user.id %>
-      <%= link_to "削除", post_post_comment_path(@post, post_comment), method: :delete, data: {confirm: '本当に削除しますか'}, class: "btn btn-danger" %>
-    <% end %>
-  <% end %>
-</div>
-
-<div class="row">
-  <%= form_with model: [@post, @post_comment] do |f| %>
-    <%= f.text_area :comment, rows: '5',placeholder: "コメントをここに" %>
-    <%= f.submit "送信" %>
-  <% end %>
 </div>
