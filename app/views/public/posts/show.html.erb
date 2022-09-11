@@ -13,13 +13,13 @@
     <div class="col-md-1"></div>
     <div class="col-md-9">
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-3">
           <%= link_to user_path(@post.user.id), class: "text-dark" do %>
             <%= image_tag @post.user.get_profile_image(100,100) %>
             <%= @post.user.name %>
           <% end %>
         </div>
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
         <% if @post.user.id == current_user.id %>
         <div class="col-md-2">
           <%= link_to "編集する", edit_post_path(@post.id), class: "btn btn-success" %>
@@ -79,8 +79,38 @@
       </div>
       <div class="row">
         <!--撮影場所-->
+        <h4>撮影場所</h4>
+        <div id='map'></div>
+
+        <style>
+        #map {
+          height: 400px;
+          width: 90%;
+        }
+        </style>
+
+        <!-- js部分 -->
+        <script>
+        //初期マップの設定
+        let map
+        let marker
+        function initMap(){
+          geocoder = new google.maps.Geocoder()
+
+          map = new google.maps.Map(document.getElementById('map'), {
+            center:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+            zoom: 15,
+          });
+
+           marker = new google.maps.Marker({
+            position:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+            map: map
+          });
+        }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>
       </div>
-      <div class="row">
+      <div class="row mt-3">
         <%= form_with model: [@post, @post_comment] do |f| %>
           <%= f.text_area :comment, rows: '5',placeholder: "コメントをここに" %>
           <%= f.submit "送信" %>
