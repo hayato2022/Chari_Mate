@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   # ユーザー側
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
@@ -16,13 +17,19 @@ Rails.application.routes.draw do
 
 
   scope module: :public do
-    root to: "homes#top"
+    root to: "posts#index"
     get "/about" => "homes#about"
     resources :posts do
       # いいね機能のidはurlに含まなくていいため、resourceを使用
       resource :likes, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
     end
+
+    # public/calory
+    resources :calories, only: [:new, :create, :index, :show]
+
+
+    # public/user
     get "users/unsubscribe" => "users#unsubscribe"
     patch "users/withdrawal" => "users#withdrawal"
     resources :users, only: [:show, :edit, :update] do

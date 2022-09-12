@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+      <div class="col-md-2">
+        <%= render 'public/posts/sidebar' %>
+      </div>
+      <div class="col-md-10">
+        <h4>カロリー計算</h4>
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>自転車</td>
+                <td><%= @calory.mets %></td>
+              </tr>
+              <tr>
+                <td>時間</td>
+                <td><%= @calory.minute %></td>
+              </tr>
+              <tr>
+                <td>体重</td>
+                <td><%= @calory.weight %></td>
+              </tr>
+              <tr>
+                <td>消費カロリー</td>
+                <td><%= @calory.calorie_consumption %></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
