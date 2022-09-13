@@ -26,7 +26,8 @@ Rails.application.routes.draw do
     end
 
     # public/calory
-    resources :calories, only: [:new, :create, :index, :show]
+    delete "calories/destroy_all" => "calories#destroy_all"
+    resources :calories, only: [:new, :create, :index, :show, :destroy]
 
 
     # public/user

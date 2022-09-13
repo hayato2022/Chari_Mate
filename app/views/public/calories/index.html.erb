@@ -1,2 +1,53 @@
-<h1>Public::Calories#index</h1>
-<p>Find me in app/views/public/calories/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <%= render 'public/posts/sidebar' %>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-6">
+      <h4>消費カロリー一覧</h4>
+      <div class="row">
+        <div class="col-md-6 my-4 mx-auto">
+          <%= image_tag 'bicycle_illustration.jpg', size: "130x130" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6"></div>
+        <div class="col-md-3 my-2">
+          <%= link_to "全て削除", calories_destroy_all_path, method: :delete, data: {confirm: '本当に削除しますか'}, class: "btn btn-danger " %>
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>記録日時</th>
+            <th>運動強度</th>
+            <th>時間</th>
+            <th>体重</th>
+            <th>消費カロリー</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @calories.each do |calory| %>
+            <tr>
+              <td><%= l calory.created_at %></td>
+              <td><%= calory.mets %> メッツ</td>
+              <td><%= calory.minute %> 分</td>
+              <td><%= calory.weight %> kg</td>
+              <td><%= calory.calorie_consumption %> kcal</td>
+              <td>
+                <% if calory.user.id == current_user.id %>
+                  <%= link_to "削除", calory_path(calory.id), method: :delete, data: {confirm: '本当に削除しますか'}, class: "btn btn-danger btn-sm" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @calories %>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>
