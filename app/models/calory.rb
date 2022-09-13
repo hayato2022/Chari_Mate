@@ -4,6 +4,6 @@ class Calory < ApplicationRecord
 
   # 消費カロリーを求めるメソッド
   def calorie_consumption
-    mets * weight * (minute / 0.0166667) * 1.05
+    (mets * weight * (minute * 0.0166667) * 1.05).round
   end
 end

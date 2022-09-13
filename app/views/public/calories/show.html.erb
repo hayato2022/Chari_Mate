@@ -3,28 +3,31 @@
       <div class="col-md-2">
         <%= render 'public/posts/sidebar' %>
       </div>
-      <div class="col-md-10">
+      <div class="col-md-1"></div>
+      <div class="col-md-6">
         <h4>カロリー計算</h4>
-          <table class="table">
+        
+          <table class="table table-borderless">
             <tbody>
               <tr>
-                <td>自転車</td>
-                <td><%= @calory.mets %></td>
+                <td>自転車(運動強度)</td>
+                <td><%= @calory.mets %>メッツ</td>
               </tr>
               <tr>
                 <td>時間</td>
-                <td><%= @calory.minute %></td>
+                <td><%= @calory.minute %>分</td>
               </tr>
               <tr>
                 <td>体重</td>
-                <td><%= @calory.weight %></td>
+                <td><%= @calory.weight %>kg</td>
               </tr>
               <tr>
                 <td>消費カロリー</td>
-                <td><%= @calory.calorie_consumption %></td>
+                <td><%= @calory.calorie_consumption %>kcal</td>
               </tr>
           </tbody>
         </table>
       </div>
+      <div class="col-md-3"></div>
     </div>
 </div>
