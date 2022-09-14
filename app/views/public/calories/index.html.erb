@@ -46,7 +46,11 @@
           <% end %>
         </tbody>
       </table>
-      <%= paginate @calories %>
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <%= paginate @calories %>
+        </div>
+      </div>
     </div>
     <div class="col-md-3"></div>
   </div>
