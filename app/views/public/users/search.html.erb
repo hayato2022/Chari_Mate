@@ -12,10 +12,17 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <%= link_to user_path(user.id), class: "text-dark" do %>
-          <td><%= image_tag user.get_profile_image(100,100) %></td>
-          <td><%= user.name %></td>
-        <% end %>
+          <td>
+            <%= link_to user_path(user.id), class: "text-dark" do %>
+              <%= image_tag user.get_profile_image(100,100) %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to user_path(user.id), class: "text-dark" do %>
+              <%= user.name %>
+            <% end %>
+          </td>
+
       </tr>
     <% end %>
   </tbody>

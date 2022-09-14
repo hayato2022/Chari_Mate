@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+
   # ユーザー側
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
@@ -49,6 +50,11 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: 'admin/sessions'
   }
+
+  namespace :admin do
+    root to: "users#index"
+    resources :users, only: [:show, :edit, :update]
+  end
 
 
 
