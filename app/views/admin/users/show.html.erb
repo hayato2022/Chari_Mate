@@ -7,12 +7,12 @@
       <%= image_tag @user.get_profile_image(100,100) %>
     </div>
     <div class="col">
-      <%= link_to user_followings_path(@user), class: "text-dark" do %>
+      <%= link_to admin_user_followings_path(@user), class: "text-dark" do %>
         <%= @user.followings.count %>フォロー
       <% end %>
     </div>
     <div class="col">
-      <%= link_to user_followers_path(@user), class: "text-dark" do %>
+      <%= link_to admin_user_followers_path(@user), class: "text-dark" do %>
         <%= @user.followers.count %>フォロワー
       <% end %>
     </div>

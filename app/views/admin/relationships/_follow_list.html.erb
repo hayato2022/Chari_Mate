@@ -12,22 +12,22 @@
       <tbody>
         <tr>
           <td>
-            <%= link_to user_path(user.id), class: "text-dark" do %>
+            <%= link_to admin_user_path(user.id), class: "text-dark" do %>
               <%= image_tag user.get_profile_image(100,100) %>
             <% end %>
           </td>
           <td>
-            <%= link_to user_path(user.id), class: "text-dark" do %>
+            <%= link_to admin_user_path(user.id), class: "text-dark" do %>
               <%= user.name %>
             <% end %>
           </td>
 
           <td>
-            <%= link_to user_followings_path(user), class: "text-dark" do %>
+            <%= link_to admin_user_followings_path(user), class: "text-dark" do %>
               <%= user.followings.count %> フォロー </td>
             <% end %>
           <td>
-            <%= link_to user_followers_path(user), class: "text-dark" do %>
+            <%= link_to admin_user_followers_path(user), class: "text-dark" do %>
               <%= user.followers.count %> フォロワー
             <% end %>
           </td>

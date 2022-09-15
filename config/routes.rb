@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
 
 
+  namespace :admin do
+    get 'relationships/followers'
+    get 'relationships/followings'
+  end
   # ユーザー側
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
@@ -53,7 +57,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: "users#index"
-    resources :users, only: [:show, :edit, :update]
+    resources :users, only: [:show, :edit, :update] do
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
+    end
   end
 
 
