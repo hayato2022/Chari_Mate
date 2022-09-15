@@ -21,7 +21,7 @@
     <%= @user.introduction %>
   </div>
   <div class="row">
-    <%= link_to "プロフィールを編集", edit_admin_user_path(@user.id), class: "btn btn-outline-secondary" %>
+    <%= link_to "ユーザー情報を編集", edit_admin_user_path(@user.id), class: "btn btn-outline-secondary" %>
   </div>
   <div class="row">
     <% @posts.each do |post| %>
