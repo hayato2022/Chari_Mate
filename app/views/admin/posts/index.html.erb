@@ -7,7 +7,7 @@
               <td>タグリスト</td>
               <% @tag_list.each do |tag| %>
                 <td>
-                  <%= link_to posts_path(tag_id: tag.id), class: "text-dark" do %>
+                  <%= link_to admin_posts_path(tag_id: tag.id), class: "text-dark" do %>
                     <%= tag.name %>
                   <% end %>
                 </td>
@@ -19,7 +19,6 @@
   </div>
   <div class="row">
     <div class="col-md-2">
-      <%= render 'sidebar' %>
     </div>
 
     <div class="col-md-4">
@@ -28,7 +27,37 @@
           <h4><%= @post_nameの投稿一覧 %></h4>
         </div>
       </div>
-      <%= render 'post_index', posts: @posts %>
+      <% @posts.each do |post| %>
+        <div class="row">
+          <div class="col">
+             <!--プロフィール画像-->
+             <%= image_tag post.user.get_profile_image(100,100) %>
+          </div>
+          <div class="col">
+            <p><%= post.user.name %></p>
+          </div>
+          <div class="row">
+            <%= link_to admin_post_path(post.id) do %>
+              <%= image_tag post.get_image(350,300) %>
+            <% end %>
+          </div>
+          <div class="row">
+            <div class="col">
+              <!--いいね数-->
+                <p>
+                  <i class="fas fa-heart"></i><%= post.likes.count %>いいね
+                </p>
+            </div>
+            <div class="col">
+              <!--コメント-->
+              <p>コメント<%= post.post_comments.count %>件</p>
+            </div>
+            <div class="row">
+              <%= post.body %>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
 
     <div class="col-md-6">
@@ -76,7 +105,7 @@
           　　　//マーカーをクリックしたとき、詳細情報を表示
                 let infowindow = new google.maps.InfoWindow({
                   position: markerLatLng,
-                  content: "<a href='<%= post_url(post.id) %>' target='_blank'><%= post.body %></a>"
+                  content: "<a href='<%= admin_post_url(post.id) %>' target='_blank'><%= post.body %></a>"
                 }); //ここで詳細ページへのリンクを表示させる
                 marker.addListener('click', function() {
                   infowindow.open(map, marker);

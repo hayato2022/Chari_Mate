@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
 
-
-
-  namespace :admin do
-    get 'relationships/followers'
-    get 'relationships/followings'
-  end
   # ユーザー側
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
@@ -60,6 +54,9 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :edit, :update] do
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
+    end
+    resources :posts, only: [:index, :show, :destroy] do
+      resources :post_comments, only: [:destroy]
     end
   end
 
