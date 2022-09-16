@@ -14,7 +14,7 @@
         <p><%= @user.id %></p>
       </div>
     </div>
-    
+
     <div class="row mb-2">
       <div class="col-lg-3">
         <p><%= f.label :profile_image, "プロフィール画像" %></p>
@@ -23,7 +23,7 @@
         <p><%= f.file_field :profile_image, accept: "image/*" %></p>
       </div>
     </div>
-    
+
     <div class="row mb-2">
       <div class="col-lg-3">
         <%= f.label :name, "ユーザー名" %>
@@ -32,7 +32,7 @@
         <%= f.text_field :name, class: "rounded" %>
       </div>
     </div>
-    
+
     <div class="row mb-2">
       <div class="col-lg-3">
         <%= f.label :email, "メールアドレス" %>
@@ -49,7 +49,7 @@
         <%= f.radio_button :is_active, 'true' %>
         <%= f.label :is_active, '有効', value: true %>
         <%= f.radio_button :is_active, 'false' %>
-        <%= f.label :is_active, '退会(利用停止)', value: false %>
+        <%= f.label :is_active, '退会(利用停止にする)', value: false %>
       </div>
     </div>
     <div class="row">
