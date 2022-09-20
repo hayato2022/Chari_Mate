@@ -11,13 +11,12 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
     # ゲストログイン
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
-    get 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
 
 
   scope module: :public do
     root to: "posts#index"
-    get "/about" => "homes#about"
+
     resources :posts do
       # いいね機能のidはurlに含まなくていいため、resourceを使用
       resource :likes, only: [:create, :destroy]
@@ -28,6 +27,8 @@ Rails.application.routes.draw do
     delete "calories/destroy_all" => "calories#destroy_all"
     resources :calories, only: [:new, :create, :index, :show, :destroy]
 
+    delete "notifications/destroy_all" => "notifications#destroy_all"
+    resources :notifications, only: [:index]
 
     # public/user
     get "users/unsubscribe" => "users#unsubscribe"

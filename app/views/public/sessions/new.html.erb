@@ -18,5 +18,8 @@
   </div>
 <% end %>
 
+<h3>ゲストログインの方</h3>
+<p><%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, method: :post %></p>
+
 <h3>ユーザー登録がまだの方</h3>
 <p><%= link_to "こちら", new_user_registration_path %>から新規登録</p>
