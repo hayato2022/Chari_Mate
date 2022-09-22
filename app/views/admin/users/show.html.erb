@@ -48,7 +48,7 @@
       <div class="row">
         <% @posts.each do |post| %>
          <div class="col-10 col-md-6 col-lg-4">
-           <div class="card">
+           <div class="card mx-auto mt-4 shadow-lg">
             <%= link_to admin_post_path(post.id) do %>
               <%= image_tag post.get_image(300,250), class: "card-img-top"; %>
             <% end %>
