@@ -1,0 +1,59 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ .n-circle {
+  position: absolute;
+  padding-left: 1rem;
+  padding-top: 0rem;
+  color: #efa04c;
+}
+
+.main-visual{
+  background-image: url("<%= asset_path('bicycle2.jpg') %>");
+  height: 320px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  padding-top: 65px;
+}
+
+.main-visual-content{
+  width: 55%;
+  height: 170px;
+  background-color: rgba( 0, 0, 0, 0.5);
+  padding-top: 15px;
+}
+
+@media screen and (max-width: 768px) {
+  .main-visual-content {
+    height: 100%;
+  }
+}
+
+.main-visual-text{
+  font-size: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .main-visual-text {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .main-visual-text {
+    color: fff;
+    font-size: 10px;
+  }

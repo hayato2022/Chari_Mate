@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: "posts#index"
-
+    get "homes/about"
     resources :posts do
       # いいね機能のidはurlに含まなくていいため、resourceを使用
       resource :likes, only: [:create, :destroy]
