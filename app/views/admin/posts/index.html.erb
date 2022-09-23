@@ -9,10 +9,10 @@
   </div>
 
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-6">
       <% @posts.each do |post| %>
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-11">
           <div class="card mx-auto mt-4 shadow-lg">
             <%= link_to admin_post_path(post.id) do %>
               <%= image_tag post.get_image(200,150), class: "card-img-top"; %>
@@ -39,7 +39,7 @@
       </div>
     <% end %>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-6">
       <div id='map'></div>
 
       <style>
