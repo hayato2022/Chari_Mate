@@ -1,74 +1,70 @@
 <div class="container">
   <div class="row">
-    <div class="col">
-      <% flash.each do |key, value| %>
-       <%= content_tag(:div, value, class: key) %>
+    <div class="col-md-2">
+      <%= image_tag @post.user.get_profile_image(100,100), class: "rounded-circle" %>
+    </div>
+    <div class="col-md-5 pt-5">
+      <%= link_to admin_user_path(@post.user.id), class: "text-dark" do %>
+        <h4><%= @post.user.name %></h4>
+      <% end %>
+    </div>
+    <div class="col-md-5 mt-5">
+      <%= link_to "投稿削除", admin_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-11 my-3">
+      <%= image_tag @post.get_image(900,500) %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-11">
+      <p><%= l @post.created_at, format: :japanese %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
+      <p><i class="fas fa-heart"></i><%= @post.likes.count %>いいね</p>
+    </div>
+    <div class="col-md-9">
+      <p><i class="far fa-comment"></i>コメント<%= @post.post_comments.count %>件</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-11">
+      <p><%= @post.body %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-11">
+      <% @post_tags.each do |tag| %>
+        <%= link_to admin_posts_path(tag_id: tag.id), class: "btn btn-info" do %>
+          <%= tag.name %>
+        <% end %>
       <% end %>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-2"></div>
+  <div class="row ">
     <div class="col-md-1"></div>
-    <div class="col-md-9">
-      <div class="row">
-        <div class="col-md-3">
-          <%= link_to admin_user_path(@post.user.id), class: "text-dark" do %>
-            <%= image_tag @post.user.get_profile_image(100,100) %>
-            <%= @post.user.name %>
-          <% end %>
-        </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-2">
-          <%= link_to "削除する", admin_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <%= image_tag @post.get_image(700,400) %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-2">
-          <p><%= l @post.created_at, format: :japanese %></p>
-        </div>
-        <div class="col-md-7"></div>
-      </div>
-      <div class="row">
-        <div class="col-md-2">
-          <!--いいね数-->
-            <p>
-              <i class="fas fa-heart"></i><%= @post.likes.count %>いいね
-            </p>
-        </div>
-        <div class="col-md-2">
-          <!--コメント数-->
-          <p>コメント<%= @post.post_comments.count %>件</p>
-        </div>
-        <div class="col-md-5"></div>
-      </div>
-      <div class="row">
-        <div class="col-md-9">
-          <p><%= @post.body %></p>
-        </div>
-      </div>
-      <div class="row">
-        <% @post_tags.each do |tag| %>
-          <div class="col">
-            <%= link_to admin_posts_path(tag_id: tag.id) do %>
-              <%= tag.name %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-      <div class="row">
-        <!--撮影場所-->
+    <div class="col-md-8 border-bottom border-dark py-3">
+      <!--撮影場所-->
         <h4>撮影場所</h4>
         <div id='map'></div>
 
         <style>
         #map {
-          height: 400px;
-          width: 90%;
+          height: 350px;
+          width: 80%;
         }
         </style>
 
@@ -92,29 +88,25 @@
         }
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>
-      </div>
-
-      <% @post.post_comments.each do |post_comment| %>
-        <div class="row">
-            <div class="col">
-              <%= image_tag post_comment.user.get_profile_image(100,100) %>
-            </div>
-            <div class="col">
-              <%= post_comment.user.name %>
-            </div>
-            <div class="col">
-              <%= l post_comment.created_at %>
-            </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <p><%= post_comment.comment %></p>
-          </div>
-          <div class="col">
-              <%= link_to "削除", admin_post_post_comment_path(@post, post_comment), method: :delete, data: {confirm: '本当に削除しますか'}, class: "btn btn-danger" %>
-          </div>
-        </div>
-      <% end %>
     </div>
   </div>
+
+  <% @post.post_comments.each do |post_comment| %>
+  <div class="row mt-3">
+    <div class="col-md-1"></div>
+    <div class="col-md-1">
+      <%= image_tag post_comment.user.get_profile_image(60,60), class: "rounded-circle" %>
+    </div>
+    <div class="col-md-4">
+      <%= link_to admin_user_path(post_comment.user.id), class:"text-dark" do %>
+        <%= post_comment.user.name %>
+      <% end %>
+      <%= l post_comment.created_at %>
+      <p><%= post_comment.comment %></p>
+    </div>
+    <div class="col-md-4">
+      <%= link_to "コメント削除", admin_post_post_comment_path(@post, post_comment), method: :delete, data: {confirm: '本当に削除しますか'}, class: "btn btn-danger" %>
+    </div>
+  </div>
+  <% end %>
 </div>

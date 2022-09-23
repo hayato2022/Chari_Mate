@@ -110,10 +110,13 @@
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>
       </div>
-      <div class="row mt-3">
-        <%= form_with model: [@post, @post_comment] do |f| %>
-          <%= f.text_area :comment, rows: '5',placeholder: "コメントをここに" %>
-          <%= f.submit "送信" %>
+      <div class="new-comment card-text">
+        <%= form_with(model:[@post, @post_comment]) do |f| %>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">コメントする</label>
+            <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+          </div>
+          <%= f.submit "送信する", class:"btn btn-lg btn-info mt-2 float-right" %>
         <% end %>
       </div>
       <% @post.post_comments.each do |post_comment| %>
