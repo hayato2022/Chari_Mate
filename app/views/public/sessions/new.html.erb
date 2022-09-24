@@ -1,25 +1,72 @@
-<h3>ログイン</h3>
-
 <%= form_with model: @user, url: user_session_path do |f| %>
-  <div class="field">
-    <%= f.label :email, "メールアドレス" %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-3 my-3">
+        <h3><strong>ログイン</strong></h3>
+      </div>
+      <div class="col-md-7"></div>
+    </div>
 
-  <div class="field">
-    <%= f.label :password, "パスワード" %>
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+    <div class="row mb-3">
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
+        <%= f.label :email, "メールアドレス" %>
+      </div>
+      <div class="col-md-2">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "rounded" %>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
 
+    <div class="row mb-3">
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
+        <%= f.label :password, "パスワード" %>
+      </div>
+      <div class="col-md-2">
+        <%= f.password_field :password, autocomplete: "current-password", class: "rounded" %>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
 
+    <div class="row mb-3">
+      <div class="col-md-3"></div>
+      <div class="col-md-3"></div>
+      <div class="col-md-2">
+        <%= f.submit "ログイン", class: "btn btn-success" %>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "ログイン" %>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-3 my-3">
+        <h4>ゲストログインの方</h4>
+      </div>
+      <div class="col-md-7"></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-4"></div>
+      <div class="col-md-5">
+        <p class="ml-4"><%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, method: :post, class: "btn btn-warning" %></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-4 my-3">
+        <h4>ユーザー登録がまだの方</h4>
+      </div>
+      <div class="col-md-6"></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3"></div>
+      <div class="col-md-9">
+        <h5><%= link_to "こちら", new_user_registration_path %>から新規登録</h5>
+      </div>
+    </div>
   </div>
 <% end %>
-
-<h3>ゲストログインの方</h3>
-<p><%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, method: :post %></p>
-
-<h3>ユーザー登録がまだの方</h3>
-<p><%= link_to "こちら", new_user_registration_path %>から新規登録</p>
