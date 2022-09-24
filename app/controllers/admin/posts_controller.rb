@@ -10,7 +10,7 @@ class Admin::PostsController < ApplicationController
       @posts = @tag.posts.all
       @post_name = @tag.name
     else
-      @posts = Post.all
+      @posts = Post.page(params[:page]).per(5)
       @post_name = "ユーザー"
     end
   end
