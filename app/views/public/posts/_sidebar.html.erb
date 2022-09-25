@@ -51,13 +51,13 @@
       <tr>
         <td>
           <% if unchecked_notifications.any? %>
-            <span class="fa-stack">
-              <%= link_to notifications_path, class: "text-dark" do %>
-                <i class="far fa-bell fa-lg fa-stack-1x" style="font-size: 1.5em;"></i>
+            <%= link_to notifications_path, class: "text-dark" do %>
+              <span class="fa-stack">
+                <i class="far fa-bell fa-lg  fa-stack-1x" style="font-size: 1.5em;"></i>
                 <i class="fas fa-circle fa-lg n-circle fa-stack-1x"></i></br>
-                <p>通知</p>
-               <% end %>
-            </span>
+              </span>
+              <p>通知</p>
+          <% end %>
           <% else %>
             <%= link_to notifications_path, class: "text-dark" do %>
               <i class="far fa-bell fa-lg" style="font-size: 1.5em;"></i></br>
