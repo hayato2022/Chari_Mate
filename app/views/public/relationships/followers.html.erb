@@ -1,12 +1,20 @@
 <div class="container">
   <div class="row">
-    <div class="col">
-      <h4>フォロワー一覧</h4>
+    <div class="col-md-2">
+      <%= render 'public/posts/sidebar' %>
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <%= render 'follow_list', users: @users %>
+    <div class="col-md-1"></div>
+    <div class="col-md-9">
+      <div class="row mt-2 mb-4">
+        <div class="col-md-9">
+          <h4>フォロワー一覧</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-9">
+          <%= render 'follow_list', users: @users %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
