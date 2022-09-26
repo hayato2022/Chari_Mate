@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     delete "calories/destroy_all" => "calories#destroy_all"
     resources :calories, only: [:new, :create, :index, :show, :destroy]
 
+    delete "notifications/destroy_all" => "notifications#destroy_all"
     resources :notifications, only: [:index]
 
     # public/user
