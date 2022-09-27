@@ -3,7 +3,7 @@ class Public::UsersController < ApplicationController
   before_action :sent_user, only: [:show, :edit, :update, :likes]
 
   def show
-    @posts = @user.posts
+    @posts = @user.posts.page(params[:page]).per(9)
   end
 
   def edit

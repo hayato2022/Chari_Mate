@@ -7,10 +7,10 @@ class Admin::PostsController < ApplicationController
 
     if params[:tag_id]
       @tag = Tag.find(params[:tag_id])
-      @posts = @tag.posts.all
+      @posts = @tag.posts.page(params[:page]).per(3)
       @post_name = @tag.name
     else
-      @posts = Post.page(params[:page]).per(5)
+      @posts = Post.page(params[:page]).per(3)
       @post_name = "ユーザー"
     end
   end
