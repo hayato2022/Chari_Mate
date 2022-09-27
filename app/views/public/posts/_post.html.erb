@@ -1,32 +1,38 @@
-<h4>撮影した場所をクリック！</h4>
-  <%= form_with model: post, local: true do |f| %>
-    <div class="row">
-      <%= f.label :image, "・画像を選択" %> </br>
-      <%= f.file_field :image, accept: "image/*" %>
-    </div>
+<div class="row no-gutters">
+    <div class="col-md-12  mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
+      <h5 class="text-dark bg-light p-4 mb-0">撮影した場所をクリック！</h5>
+      <div class="form-body p-4">
+        <% if post.errors.any? %>
+          <ul class="alert alert-danger" role="alert">
+            <h6 class="alert-heading">
+              <%= post.errors.count %>件のエラーが発生しました
+            </h6>
+            <% post.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+        <%= form_with model: post, local: true do |f| %>
+          <%= f.label :image, "・画像を選択" %> </br>
+          <%= f.file_field :image, accept: "image/*", class: "ml-3" %>
 
-    <div class="row">
-      <%= f.label :body, "・本文" %> </br>
-      <%= f.text_area :body %>
-    </div>
+          <%= f.label :body, "・本文", class: "mt-2" %></br>
+          <%= f.text_area :body, size: "35x3", class: "rounded ml-3" %>
 
-    <!--タグの投稿機能-->
-    <div class="row">
-      <%= f.label :name, "・タグ「,(カンマ)」で複数追加" %> </br>
-      <%= f.text_field :name %>
-    </div>
+          <%= f.label :name, "・タグ「,(カンマ)」で複数追加", class: "mt-2" %></br>
+          <%= f.text_field :name, size: 30, class: "rounded ml-3" %></br>
 
-    <!--場所の投稿機能-->
-    <div class="row">
-      <%= f.label :lat,"緯度" %></br>
-      <%= f.text_field :lat,:value =>"緯度", id: :lat %>
+          <div class="row my-3 ml-2">
+            <%= f.label :lat,"緯度" %></br>
+            <%= f.text_field :lat,:value =>"緯度", id: :lat %>
+          </div>
+          <div class="row my-3 ml-2">
+            <%= f.label :lng,"経度" %>
+            <%= f.text_field :lng,:value =>"経度", id: :lng %>
+          </div>
+          <hr>
+          <%= f.submit '投稿', class:"btn btn-lg btn-block btn-info mt-4" %>
+        <% end %>
+      </div>
     </div>
-    <div class="row">
-      <%= f.label :lng,"経度" %>
-      <%= f.text_field :lng,:value =>"経度", id: :lng %>
-    </div>
-
-    <div class="row">
-      <%= f.submit "投稿" %>
-    </div>
-  <% end %>
+  </div>

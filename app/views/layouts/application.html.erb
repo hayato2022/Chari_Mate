@@ -44,10 +44,12 @@
       </nav>
     </header>
     <main class="mb-auto">
-      <p >
-
-      </p>
-      <%= yield %>
+      <% flash.each do |key, value| %>
+        <p class="alert alert-<%= key %>">
+          <%= value %>
+        </p>
+      <% end %>
+    <%= yield %>
     </main>
     <footer class="footer bg-dark text-white pt-5 pb-4 mt-5">
       <div class="container">
