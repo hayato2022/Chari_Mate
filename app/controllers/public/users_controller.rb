@@ -19,7 +19,7 @@ class Public::UsersController < ApplicationController
 
   def likes
     likes = Like.where(user_id: @user.id).pluck(:post_id)
-    @like_posts = Post.find(likes)
+    @posts = Post.find(likes)
   end
 
   def unsubscribe
