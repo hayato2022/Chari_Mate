@@ -11,8 +11,9 @@ class Public::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to user_path(@user.id)
+      redirect_to user_path(@user.id), flash: {info: "編集完了しました"}
     else
+      flash.now[:danger] = '編集に失敗しました'
       render :edit
     end
   end
@@ -30,7 +31,7 @@ class Public::UsersController < ApplicationController
     @user = current_user
     @user.update(is_active: false)
     reset_session
-    redirect_to root_path
+    redirect_to new_user_registration_path
   end
 
   def search

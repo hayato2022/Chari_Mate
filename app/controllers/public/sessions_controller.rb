@@ -6,10 +6,10 @@ class Public::SessionsController < Devise::SessionsController
   def guest_sign_in
     user = User.guest
     sign_in user
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+    redirect_to root_path, flash: {info: "ゲストユーザーとしてログインしました"}
   end
 
-  # GET /resource/sign_in
+  # GET /resource/sign_in。
   # def new
   #   super
   # end
