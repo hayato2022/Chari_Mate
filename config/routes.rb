@@ -9,8 +9,9 @@ Rails.application.routes.draw do
 # ログアウトの際method の delete が get になってしまうので以下を追記
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
+
     # ゲストログイン
-    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+    post 'users/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
 
 
@@ -49,9 +50,9 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: 'admin/sessions'
   }
-  
+
   devise_scope :admin do
-    post 'admins/guest_sign_in', to: 'admins/sessions#guest_sign_in'
+    post 'admins/guest_sign_in', to: 'admin/sessions#guest_sign_in'
   end
 
   namespace :admin do
