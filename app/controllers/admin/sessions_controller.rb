@@ -8,6 +8,12 @@ class Admin::SessionsController < Devise::SessionsController
   #   super
   # end
 
+  def guest_sign_in
+    admin = Admin.guest
+    sign_in admin
+    redirect_to admin_root_path, flash: {info: "ゲストユーザーとしてログインしました。"}
+  end
+
   def after_sign_in_path_for(resource)
    admin_root_path
   end

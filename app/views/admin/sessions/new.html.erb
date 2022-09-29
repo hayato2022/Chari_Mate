@@ -15,7 +15,7 @@
         <%= f.email_field :email, size: 50, class: "rounded", autofocus: true, autocomplete: "email" %>
       </div>
     </div>
-    <div class="row mb-5">
+    <div class="row mb-4">
       <div class="col-lg-2"></div>
       <div class="col-lg-2">
         <%= f.label :password, "パスワード" %>
@@ -24,12 +24,27 @@
         <%= f.password_field :password, size: 50, class: "rounded", autocomplete: "current-password" %>
       </div>
     </div>
-    <div class="row">
+    <div class="row mb-5">
       <div class="col-lg-4"></div>
       <div class="col-lg-2">
         <%= f.submit "ログイン", class: "btn btn-primary btn-block" %>
       </div>
       <div class="col-lg-6"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-3 my-3">
+        <h4>ゲストログインの方</h4>
+      </div>
+      <div class="col-md-7"></div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-4"></div>
+      <div class="col-md-5">
+        <p>
+          <%= link_to "ゲストログイン（閲覧用）",admins_guest_sign_in_path, method: :post, class: "btn btn-success" %>
+        </p>
+      </div>
     </div>
   </div>
 <% end %>

@@ -15,19 +15,10 @@ class Admin::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to admin_root_path, notice: 'ユーザーの情報を編集しました'
+      redirect_to admin_root_path, flash: {info: "ユーザーの情報をしました"}
     else
-      flash.now[:alert] = '編集に失敗しました'
+      flash.now[:danger] = '編集に失敗しました'
       render :edit
-    end
-  end
-
-  def destroy
-    if @user.destroy
-       redirect_to admin_root_path, notice: 'ユーザーを削除しました'
-    else
-      flash.now[:alert] = '削除に失敗しました'
-      render admin_user_path(@user)
     end
   end
 

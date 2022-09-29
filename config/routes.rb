@@ -49,6 +49,10 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: 'admin/sessions'
   }
+  
+  devise_scope :admin do
+    post 'admins/guest_sign_in', to: 'admins/sessions#guest_sign_in'
+  end
 
   namespace :admin do
     root to: "users#index"

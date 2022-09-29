@@ -4,11 +4,11 @@
       <%= render 'public/posts/sidebar' %>
     </div>
     <div class="col-md-1"></div>
-    <div class="col-md-6">
+    <div class="col-md-9">
       <h4>消費カロリー一覧</h4>
       <div class="row">
-        <div class="col-md-6 my-4 mx-auto">
-          <%= image_tag 'bicycle_illustration.jpg', size: "130x130" %>
+        <div class="col-md-4 my-4 mx-auto">
+          <%= image_tag 'bicycle_illustration.jpg', size: "150x150" %>
         </div>
       </div>
       <div class="row">
@@ -32,7 +32,7 @@
         <tbody>
           <% @calories.each do |calory| %>
             <tr>
-              <td><%= l calory.created_at %></td>
+              <td><%= l calory.created_at, format: :long %></td>
               <td><%= calory.mets %> メッツ</td>
               <td><%= calory.minute %> 分</td>
               <td><%= calory.weight %> kg</td>
@@ -52,6 +52,5 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3"></div>
   </div>
 </div>

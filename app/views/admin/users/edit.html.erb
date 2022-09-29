@@ -1,51 +1,56 @@
 <%= form_with model: @user, url: admin_user_path(@user.id), method: :patch do |f| %>
   <div class="container">
     <div class="row my-4">
-      <div class="col-lg-5 text-center">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 ">
         <h4><%= @user.name %>さんの会員情報編集</h4>
       </div>
-      <div class="col-lg-7"></div>
     </div>
-    <div class="row mb-2">
-      <div class="col-lg-3">
+    <div class="row mb-3">
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
         <p>ユーザーID</p>
       </div>
-      <div class="col-lg-9">
+      <div class="col-md-6">
         <p><%= @user.id %></p>
       </div>
     </div>
 
-    <div class="row mb-2">
-      <div class="col-lg-3">
+    <div class="row mb-3">
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
         <p><%= f.label :profile_image, "プロフィール画像" %></p>
       </div>
-      <div class="col-lg-9">
+      <div class="col-md-6">
         <p><%= f.file_field :profile_image, accept: "image/*" %></p>
       </div>
     </div>
 
-    <div class="row mb-2">
-      <div class="col-lg-3">
+    <div class="row mb-3">
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
         <%= f.label :name, "ユーザー名" %>
       </div>
-      <div class="col-lg-2 mr-5">
+      <div class="col-md-6">
         <%= f.text_field :name, class: "rounded" %>
       </div>
     </div>
 
-    <div class="row mb-2">
-      <div class="col-lg-3">
+    <div class="row mb-3">
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
         <%= f.label :email, "メールアドレス" %>
       </div>
-      <div class="col-lg-9">
+      <div class="col-md-6">
         <%= f.text_field :email, class: "rounded" %>
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-lg-3">
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
         <%= f.label :is_active, "ユーザーステータス" %>
       </div>
-      <div class="col-lg-9">
+      <div class="col-md-6">
         <%= f.radio_button :is_active, 'true' %>
         <%= f.label :is_active, '有効', value: true %>
         <%= f.radio_button :is_active, 'false' %>
@@ -53,11 +58,10 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-3"></div>
-      <div class="col-lg-3">
+      <div class="col-md-6"></div>
+      <div class="col-md-6">
         <%= f.submit "変更を保存", class: "btn btn-success btn-lg" %>
       </div>
-      <div class="col-lg-6"></div>
     </div>
   </div>
 <% end %>

@@ -9,8 +9,12 @@ class Public::CaloriesController < ApplicationController
   def create
     @calory = Calory.new(calory_params)
     @calory.user_id = current_user.id
-    @calory.save
-    redirect_to calory_path(@calory.id)
+    if @calory.save
+      redirect_to calory_path(@calory.id)
+    else
+      flash.now[:danger] = '削除に失敗しました'
+      render :new
+    end
   end
 
   def index
@@ -23,16 +27,21 @@ class Public::CaloriesController < ApplicationController
 
   def destroy_all
     calories = current_user.calories
-    calories.destroy_all
-    redirect_to calories_path
+    if calories.destroy_all
+      redirect_to calories_path, flash: {info: "記録を全て削除しました"}
+    else
+      @calories = current_user.calories.page(params[:page])
+      flash.now[:danger] = '削除に失敗しました'
+      render :index
+    end
   end
 
   def destroy
     if @calory.destroy
-      redirect_to calories_path, notice: '記録を削除しました'
+      redirect_to calories_path, flash: {info: "記録を削除しました"}
     else
       @calories = current_user.calories.page(params[:page])
-      flash.now[:alert] = '削除に失敗しました'
+      flash.now[:danger] = '削除に失敗しました'
       render :index
     end
   end

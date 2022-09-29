@@ -1,5 +1,4 @@
-<% if users.exists? %>
-  <% users.each do |user| %>
+  <% if users.exists? %>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -10,10 +9,11 @@
         </tr>
       </thead>
       <tbody>
+        <% users.each do |user| %>
         <tr>
           <td>
             <%= link_to admin_user_path(user.id), class: "text-dark" do %>
-              <%= image_tag user.get_profile_image(100,100) %>
+              <%= image_tag user.get_profile_image(70,70), class: "rounded-circle" %>
             <% end %>
           </td>
           <td>
@@ -32,9 +32,9 @@
             <% end %>
           </td>
         </tr>
+        <% end %>
       </tbody>
     </table>
+  <% else %>
+    <p>ユーザーはいません</p>
   <% end %>
-<% else %>
-  <p>ユーザーはいません</p>
-<% end %>

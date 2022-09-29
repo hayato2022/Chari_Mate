@@ -4,10 +4,11 @@
 <div class="col-md-9">
   <div class="form-inline">
     <span>
-      <%= link_to user_path(visitor) do %>
-        <%= image_tag visitor.get_profile_image(100,100), class: "rounded-circle" %>
+      <%= link_to user_path(visitor), class: "text-dark" do %>
+        <%= image_tag visitor.get_profile_image(80,80), class: "rounded-circle" %>
+        <strong><%= visitor.name %></strong>
       <% end %>
-      <strong><%= visitor.name %></strong>さんが
+      さんが
       <% case notification.action %>
         <% when 'follow' then %>
           <%= "あなたをフォローしました" %>
@@ -21,7 +22,7 @@
           <% else %>
             <span>
               <%= link_to post_path(notification.post) do %>
-                <%= image_tag notification.post.user.get_profile_image(100,100), class: "rounded-circle" %>
+                <%= image_tag notification.post.user.get_profile_image(80,80), class: "rounded-circle" %>
                 <strong>
                   <%= notification.post.user.name + 'さんの投稿' %>
                 </strong>
@@ -35,7 +36,7 @@
       <% end %>
     </span>
     <div class="small text-muted text-right">
-      <%= time_ago_in_words(notification.created_at).upcase %>
+      <%= time_ago_in_words(notification.created_at).upcase %>前
     </div>
   </div>
 </div>

@@ -21,9 +21,9 @@ class Admin::PostsController < ApplicationController
 
   def destroy
     if @post.destroy
-      redirect_to admin_posts_path, notice: '投稿を削除しました'
+      redirect_to admin_user_path(@post.user.id), flash: {info: "投稿を削除しました"}
     else
-      flash.now[:alert] = '削除に失敗しました'
+      flash.now[:danger] = '削除に失敗しました'
       render admin_post_path(@post)
     end
   end

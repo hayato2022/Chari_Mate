@@ -1,157 +1,164 @@
-<div class="container">
-  <div class="row mt-4">
-    <div class="col-md-2">
-      <%= render 'sidebar' %>
+<%= form_with(model:[@post, @post_comment]) do |f| %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <%= render 'layouts/error_messages', model: f.object %>
+      </div>
     </div>
-    <div class="col-md-10">
-      <div class="row mb-3 ">
-        <div class="col-md-1"></div>
-        <div class="col-md-11">
-          <div class="row">
-            <div class="col-md-2">
-              <%= link_to user_path(@post.user.id), class: "text-dark" do %>
-                <%= image_tag @post.user.get_profile_image(80,80), class: "rounded-circle" %>
-              <% end %>
-            </div>
-            <div class="col-md-5 mt-4">
-              <%= link_to user_path(@post.user.id), class: "text-dark" do %>
-                <h4><%= @post.user.name %></h4>
-              <% end %>
-            </div>
-            <div class="col-md-5 mt-4">
-              <% if @post.user.id == current_user.id %>
-                <%= link_to "編集する", edit_post_path(@post.id), class: "btn btn-success" %>
-                <%= link_to "削除する", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
-              <% end %>
+    <div class="row mt-4">
+      <div class="col-md-2">
+        <%= render 'sidebar' %>
+      </div>
+      <div class="col-md-10">
+        <div class="row mb-3 ">
+          <div class="col-md-1"></div>
+          <div class="col-md-11">
+            <div class="row">
+              <div class="col-md-2">
+                <%= link_to user_path(@post.user.id), class: "text-dark" do %>
+                  <%= image_tag @post.user.get_profile_image(80,80), class: "rounded-circle" %>
+                <% end %>
+              </div>
+              <div class="col-md-5 mt-4">
+                <%= link_to user_path(@post.user.id), class: "text-dark" do %>
+                  <h4><%= @post.user.name %></h4>
+                <% end %>
+              </div>
+              <div class="col-md-5 mt-4">
+                <% if @post.user.id == current_user.id %>
+                  <%= link_to "編集する", edit_post_path(@post.id), class: "btn btn-success" %>
+                  <%= link_to "削除する", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-11 my-3">
-          <%= image_tag @post.get_image(900,500) %>
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-11 my-3">
+            <%= image_tag @post.get_image(900,500) %>
+          </div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-11">
-          <p><%= l @post.created_at, format: :japanese %></p>
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-11">
+            <p><%= l @post.created_at, format: :long %></p>
+          </div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-2">
-          <% if @post.liked_by?(current_user) %>
-            <p>
-              <%= link_to post_likes_path(@post), method: :delete, class: "text-dark" do %>
-                <i class="fas fa-heart"></i><%= @post.likes.count %>いいね
-              <% end %>
-            </p>
-          <% else %>
-            <p>
-              <%= link_to post_likes_path(@post), method: :post, class: "text-dark" do %>
-                <i class="far fa-heart"></i><%= @post.likes.count %>いいね
-              <% end %>
-            </p>
-          <% end %>
-        </div>
-        <div class="col-md-9">
-          <p><i class="far fa-comment"></i>コメント<%= @post.post_comments.count %>件</p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-11">
-          <p><%= @post.body %></p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-11">
-          <% @post_tags.each do |tag| %>
-            <%= link_to posts_path(tag_id: tag.id), class: "btn btn-info" do %>
-              <%= tag.name %>
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-2">
+            <% if @post.liked_by?(current_user) %>
+              <p>
+                <%= link_to post_likes_path(@post), method: :delete, class: "text-dark" do %>
+                  <i class="fas fa-heart"></i><%= @post.likes.count %>いいね
+                <% end %>
+              </p>
+            <% else %>
+              <p>
+                <%= link_to post_likes_path(@post), method: :post, class: "text-dark" do %>
+                  <i class="far fa-heart"></i><%= @post.likes.count %>いいね
+                <% end %>
+              </p>
             <% end %>
-          <% end %>
+          </div>
+          <div class="col-md-9">
+            <p><i class="far fa-comment"></i>コメント<%= @post.post_comments.count %>件</p>
+          </div>
         </div>
-      </div>
 
-      <div class="row border-bottom border-dark py-3">
-        <div class="col-md-1"></div>
-        <div class="col-md-11">
-          <!--撮影場所-->
-            <h4>撮影場所</h4>
-            <div id='map'></div>
-
-            <style>
-            #map {
-              height: 350px;
-              width: 80%;
-            }
-            </style>
-
-            <!-- js部分 -->
-            <script>
-            //初期マップの設定
-            let map
-            let marker
-            function initMap(){
-              geocoder = new google.maps.Geocoder()
-
-              map = new google.maps.Map(document.getElementById('map'), {
-                center:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
-                zoom: 15,
-              });
-
-               marker = new google.maps.Marker({
-                position:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
-                map: map
-              });
-            }
-            </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API'] %>&callback=initMap" async defer></script>
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-11">
+            <p><%= @post.body %></p>
+          </div>
         </div>
-      </div>
 
-      <div class="row my-3">
-        <div class="col-md-1"></div>
-        <div class="col-md-9">
-          <%= form_with(model:[@post, @post_comment]) do |f| %>
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-11">
+            <% @post_tags.each do |tag| %>
+              <%= link_to posts_path(tag_id: tag.id), class: "btn btn-info" do %>
+                <%= tag.name %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row border-bottom border-dark py-3">
+          <div class="col-md-1"></div>
+          <div class="col-md-11">
+            <!--撮影場所-->
+              <h4>撮影場所</h4>
+              <div id='map'></div>
+
+              <style>
+              #map {
+                height: 350px;
+                width: 80%;
+              }
+              </style>
+
+              <!-- js部分 -->
+              <script>
+              //初期マップの設定
+              let map
+              let marker
+              function initMap(){
+                geocoder = new google.maps.Geocoder()
+
+                map = new google.maps.Map(document.getElementById('map'), {
+                  center:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+                  zoom: 15,
+                });
+
+                 marker = new google.maps.Marker({
+                  position:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+                  map: map
+                });
+              }
+              </script>
+              <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API'] %>&callback=initMap" async defer></script>
+          </div>
+        </div>
+
+        <div class="row my-3">
+          <div class="col-md-1"></div>
+          <div class="col-md-9">
             <div class="form-group">
               <%= f.text_area :comment, rows:'4', class: "form-control",placeholder: "コメントをここに" %>
             </div>
-            <%= f.submit "送信する", class:"btn btn-lg btn-info mt-2 float-right" %>
-          <% end %>
+              <%= f.submit "送信する", class:"btn btn-lg btn-info mt-2 float-right" %>
+          </div>
+          <div class="col-md-2"></div>
         </div>
-        <div class="col-md-2"></div>
-      </div>
 
-      <% @post.post_comments.each do |post_comment| %>
-        <div class="row mt-3">
-          <div class="col-md-1"></div>
-          <div class="col-md-1">
-            <%= image_tag post_comment.user.get_profile_image(60,60), class: "rounded-circle" %>
+        <% @post.post_comments.each do |post_comment| %>
+          <div class="row mt-3">
+            <div class="col-md-1"></div>
+            <div class="col-md-1">
+              <%= link_to user_path(post_comment.user.id) do %>
+                <%= image_tag post_comment.user.get_profile_image(60,60), class: "rounded-circle" %>
+              <% end %>
+            </div>
+            <div class="col-md-4">
+              <%= link_to user_path(post_comment.user.id), class:"text-dark" do %>
+                <%= post_comment.user.name %>
+              <% end %>
+              <%= time_ago_in_words(post_comment.created_at).upcase %>前
+              <p><%= post_comment.comment %></p>
+            </div>
+            <div class="col-md-4">
+              <% if (post_comment.user.id == current_user.id) || (@post.user.id == current_user.id) %>
+                <%= link_to "削除", post_post_comment_path(@post, post_comment), method: :delete, data: {confirm: '本当に削除しますか'}, class: "btn btn-danger" %>
+              <% end %>
+            </div>
           </div>
-          <div class="col-md-4">
-            <%= link_to user_path(post_comment.user.id), class:"text-dark" do %>
-              <%= post_comment.user.name %>
-            <% end %>
-            <%= l post_comment.created_at %>
-            <p><%= post_comment.comment %></p>
-          </div>
-          <div class="col-md-4">
-            <% if (post_comment.user.id == current_user.id) || (@post.user.id == current_user.id) %>
-              <%= link_to "削除", post_post_comment_path(@post, post_comment), method: :delete, data: {confirm: '本当に削除しますか'}, class: "btn btn-danger" %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
+<% end %>
