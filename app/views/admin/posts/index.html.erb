@@ -41,7 +41,6 @@
         </div>
       </div>
     <% end %>
-    <%= paginate @posts %>
     </div>
     <div class="col-md-6">
       <div id='map'></div>
@@ -103,6 +102,12 @@
       <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API'] %>&callback=initMap" async defer></script>
     </div>
   </div>
-
+  <div class="row mt-5">
+    <div class="col-md-5"></div>
+    <div class="col-md-4 ml-4">
+      <%= paginate @posts %>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
 
 </div>

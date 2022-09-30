@@ -9,10 +9,9 @@
           {prompt: 'タグで絞り込み検索',onchange: 'submit(this.form);'} %>
       <% end %>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-sm-12 col-md-11 col-lg-6">
           <h4 class="text-center mr-5 my-3"><%= @post_name %>の投稿一覧</h4>
           <%= render 'post_index', posts: @posts %>
-          <%= paginate @posts %>
         </div>
 
         <div class="col-lg-6 mt-5">
@@ -75,5 +74,12 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-md-5"></div>
+    <div class="col-md-4 ml-4">
+      <%= paginate @posts %>
+    </div>
+    <div class="col-md-3"></div>
   </div>
 </div>
