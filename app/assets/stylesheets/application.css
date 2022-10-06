@@ -21,7 +21,7 @@
 }
 
 .main-visual{
-  background-image: image-url("bicycle2.jpg");
+  /*background-image: image("/chari_mate/app/assets/images/bicycle2.jpg");*/
   height: 320px;
   width: 100%;
   background-size: cover;
