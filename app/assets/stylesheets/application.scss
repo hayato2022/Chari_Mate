@@ -13,15 +13,16 @@
  *= require_tree .
  *= require_self
  */
- .n-circle {
+
+.n-circle {
   position: absolute;
   padding-left: 1rem;
   padding-top: 0rem;
   color: #efa04c;
 }
 
-.main-visual{
-  background-image: image-url("<%= asset_path('bicycle2.jpg') %>");
+.main-visual {
+  background-image: image-url("bicycle2.jpg");
   height: 320px;
   width: 100%;
   background-size: cover;
@@ -29,10 +30,10 @@
   padding-top: 65px;
 }
 
-.main-visual-content{
+.main-visual-content {
   width: 55%;
   height: 170px;
-  background-color: rgba( 0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   padding-top: 15px;
 }
 
@@ -42,7 +43,7 @@
   }
 }
 
-.main-visual-text{
+.main-visual-text {
   font-size: 20px;
 }
 
