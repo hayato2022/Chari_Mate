@@ -1,0 +1,92 @@
+<%= form_with model: @calory , local: :true do |f| %>
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col-md-2">
+        <%= render 'public/posts/sidebar' %>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-12">
+            <h4>カロリー計算</h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 my-4 mx-auto">
+            <%= image_tag 'neko_bike.jpg', size: "150x150" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <table class="table table-borderless">
+              <tbody>
+                <tr>
+                  <td>自転車(運動強度)</td>
+                  <td><%= @calory.mets %>メッツ</td>
+                </tr>
+                <tr>
+                  <td>時間</td>
+                  <td><%= @calory.minute %>分</td>
+                </tr>
+                <tr>
+                  <td>体重</td>
+                  <td><%= @calory.weight %>kg</td>
+                </tr>
+                <tr>
+                  <td>消費カロリー</td>
+                  <td><%= @calory.calorie_consumption %>kcal</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-6">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>自転車の種類</th>
+                  <th>平均速度</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>ロードバイク</td>
+                  <td>時速20~30km</td>
+                </tr>
+                <tr>
+                  <td>クロスバイク</td>
+                  <td>時速18~25km</td>
+                </tr>
+                <tr>
+                  <td>マウンテンバイク</td>
+                  <td>時速18~25km</td>
+                </tr>
+                <tr>
+                  <td>ミニベロ</td>
+                  <td>時速18~25km</td>
+                </tr>
+                <tr>
+                  <td>ママチャリ</td>
+                  <td>時速12~18km</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5 class="bg-info text-white pl-4">計算式</h5>
+            <p>消費カロリー(kcal) ＝ メッツ * 体重kg * 運動時間 * 1.05</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5 class="bg-info text-white pl-4">関連リンク</h5>
+            <a href="https://www.nibiohn.go.jp/files/2011mets.pdf">出典：国立健康栄養研究所　改定版「身体活動のメッツ表」</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

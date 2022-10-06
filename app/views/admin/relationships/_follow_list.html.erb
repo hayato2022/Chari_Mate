@@ -1,0 +1,40 @@
+  <% if users.exists? %>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th></th>
+          <th>ユーザ名</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.each do |user| %>
+        <tr>
+          <td>
+            <%= link_to admin_user_path(user.id), class: "text-dark" do %>
+              <%= image_tag user.get_profile_image(70,70), class: "rounded-circle" %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to admin_user_path(user.id), class: "text-dark" do %>
+              <%= user.name %>
+            <% end %>
+          </td>
+
+          <td>
+            <%= link_to admin_user_followings_path(user), class: "text-dark" do %>
+              <%= user.followings.count %> フォロー </td>
+            <% end %>
+          <td>
+            <%= link_to admin_user_followers_path(user), class: "text-dark" do %>
+              <%= user.followers.count %> フォロワー
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>ユーザーはいません</p>
+  <% end %>

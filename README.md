@@ -1,24 +1,15 @@
-# README
+# <チャリメイト>
+## サイト概要
+### サイトテーマ
+サイクリングをしたルートのなかで、自分が気に入った風景などの写真を投稿、シャアができる
+自分が走行した距離のカロリーを知ることが出来る
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### テーマを選んだ理由
+自分はサイクリングをすることがあるのですが、走行しているときに今まで知らなかった色々な風景などを見かけたときはとても感動します。
+そのときに、自分が走ったルートの中で気に入った風景、場所などを同じサイクリング仲間同士でシャアできるようなアプリがあれば楽しいかなと思いました。
+自分が走行した距離のカロリーを表示してくれるアプリはよく見かけるのですが、
+自分が走ったルートの中で気に入った風景、場所などを同じサイクリング仲間同士でシャアできるものはあまり見かけないので、このようなアプリがあれば楽しいかなと思いこのテーマにしました。
+風景、場所などを同じサイクリング仲間同士でシャアできるようなアプリはあまり見かけなかったので、このテーマにしました。
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### ターゲットユーザ
+サイクリングが好きな人

@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <%= form_tag admin_posts_path, method: :get, class: 'boards__searchForm' do %>
+        <%= select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
+          {prompt: 'タグで絞り込み検索',onchange: 'submit(this.form);'} %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row my-3">
+      <div class="col-md-12">
+        <h4 class="text-center mr-5"><%= @post_name %>の投稿一覧</h4>
+      </div>
+    </div>
+      <% @posts.each do |post| %>
+      <div class="row">
+        <div class="col-md-11">
+          <div class="card mx-auto mt-4 shadow-lg">
+            <%= link_to admin_post_path(post.id) do %>
+              <%= image_tag post.get_image(200,150), class: "card-img-top"; %>
+            <% end %>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-3">
+                  <%= image_tag post.user.get_profile_image(50,50), class: "mt-3 rounded-circle"; %>
+                </div>
+                <div class="col-7">
+                  <p class="card-text">
+                    <i class="fas fa-heart"></i> <%= post.likes.count %>いいね <i class="far fa-comment"></i>コメント<%= post.post_comments.count %>件
+                    <p class="card-text">
+                      <%= post.body %>
+                    </p>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    </div>
+    <div class="col-md-6">
+      <div id='map'></div>
+
+      <style>
+      #map {
+        height: 700px;
+        width: 100%;
+      }
+      </style>
+
+      <!-- js部分 -->
+      <script>
+          function initMap() {
+
+            //初期表示位置
+            let latlng = new google.maps.LatLng(38.60, 139.5);
+            //デザイン
+            let styles = [
+                 {
+                  stylers: [
+                   { "saturation": 0 },
+                   { "lightness": 0 }
+                  ]
+                 }
+                ];
+
+            let map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 5.5,
+                styles: styles,
+                center: latlng
+            });
+            let transitLayer = new google.maps.TransitLayer();
+            transitLayer.setMap(map);
+
+            //複数マーカー ここから
+            <% @posts.each do |post|%>
+              ( function() {
+                let markerLatLng = new google.maps.LatLng({lat: <%= post.lat %>, lng: <%= post.lng %>}); // 緯度経度のデータ作成
+                let marker = new google.maps.Marker({
+                  position: markerLatLng,
+                  map: map
+                });
+          　　　//マーカーをクリックしたとき、詳細情報を表示
+                let infowindow = new google.maps.InfoWindow({
+                  position: markerLatLng,
+                  content: "<a href='<%= admin_post_url(post.id) %>' target='_blank'><%= post.body %></a>"
+                }); //ここで詳細ページへのリンクを表示させる
+                marker.addListener('click', function() {
+                  infowindow.open(map, marker);
+                });
+
+             })();
+            <% end %>
+            //複数マーカー ここまで
+        }
+      </script>
+
+      <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API'] %>&callback=initMap" async defer></script>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-md-5"></div>
+    <div class="col-md-4 ml-4">
+      <%= paginate @posts %>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+
+</div>

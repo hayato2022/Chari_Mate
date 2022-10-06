@@ -1,0 +1,96 @@
+<%= form_with model: @calory , local: :true do |f| %>
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col-md-2">
+        <%= render 'public/posts/sidebar' %>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-12">
+            <h4>カロリー計算</h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 my-4 mx-auto">
+            <%= image_tag 'neko_bike.jpg', size: "150x150" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <table class="table">
+                <tbody>
+                  <tr>
+                    <td><%= f.label :mets, "自転車" %></td>
+                    <td>
+                      <%= f.select :mets, [['自転車に乗る：8.9km/時',3.5], ['自転車に乗る：15.1km/時',5.8],
+                      ['自転車に乗る：16.1-19.2km/時',6.8], ['自転車に乗る：19.3-22.4km/時', 8.0],
+                      ['自転車に乗る：22.5-25.6km/時',10.0],['自転車に乗る：25.7-30.6km/時',12.0], ['自転車に乗る：32.2km/時より速い',15.8 ]] %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><%= f.label :minute, "時間" %></td>
+                    <td><%= f.text_field :minute, size: 10, class: "rounded" %> 分</td>
+                  </tr>
+                  <tr>
+                    <td><%= f.label :weight, "体重" %></td>
+                    <td><%= f.text_field :weight, size: 10, class: "rounded" %> kg</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td><%= f.submit "計算", class: "btn btn-lg btn-info"%></td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-6">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>自転車の種類</th>
+                  <th>平均速度</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>ロードバイク</td>
+                  <td>時速20~30km</td>
+                </tr>
+                <tr>
+                  <td>クロスバイク</td>
+                  <td>時速18~25km</td>
+                </tr>
+                <tr>
+                  <td>マウンテンバイク</td>
+                  <td>時速18~25km</td>
+                </tr>
+                <tr>
+                  <td>ミニベロ</td>
+                  <td>時速18~25km</td>
+                </tr>
+                <tr>
+                  <td>ママチャリ</td>
+                  <td>時速12~18km</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5 class="bg-info text-white pl-4">計算式</h5>
+            <p>消費カロリー(kcal) ＝ メッツ * 体重kg * 運動時間 * 1.05</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5 class="bg-info text-white pl-4">関連リンク</h5>
+            <a href="https://www.nibiohn.go.jp/files/2011mets.pdf">出典：国立健康栄養研究所　改定版「身体活動のメッツ表」</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

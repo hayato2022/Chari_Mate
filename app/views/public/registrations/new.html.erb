@@ -1,0 +1,82 @@
+<%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user' do |f| %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 my-3">
+        <h3><strong>新規登録</strong></h3>
+        <%= render 'layouts/error_messages', model: f.object %>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
+        <%= f.label :name, "ユーザー名(＊必須 )" %>
+      </div>
+      <div class="col-md-2">
+        <%= f.text_field :name, class: "rounded" %>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
+        <%= f.label :email, "メールアドレス(＊必須 )" %>
+      </div>
+      <div class="col-md-2">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "rounded" %>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
+        <%= f.label :password, "パスワード(＊必須・" %>
+        <% if @minimum_password_length %>
+          <%= @minimum_password_length %>文字以上)
+        <% end %>
+      </div>
+      <div class="col-md-2">
+        <%= f.password_field :password, autocomplete: "new-password", class: "rounded" %>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
+        <%= f.label :password_confirmation, "パスワード(確認用)" %>
+      </div>
+      <div class="col-md-2">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "rounded" %>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3"></div>
+      <div class="col-md-3"></div>
+      <div class="col-md-2">
+        <%= f.submit "登録する", class: "btn btn-lg btn-success" %>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-3 my-3">
+        <h3>既に登録済みの方</h3>
+      </div>
+      <div class="col-md-7"></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3"></div>
+      <div class="col-md-9">
+        <h5><%= link_to "こちら", new_user_session_path %>からログイン</h5>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2 my-3">
+      <h4>ユーザー一覧</h4>
+    </div>
+    <div class="col-md-9"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ユーザーID</th>
+            <th>ユーザー名</th>
+            <th>メールアドレス</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.id %></td>
+              <td>
+                <%= link_to admin_user_path(user.id), class: "text-dark" do %>
+                  <%= user.name %>
+                <% end %>
+              </td>
+              <td><%= user.email %></td>
+              <td>
+                <% if user.is_active? %>
+                  <p class="text-success font-weight-bold">有効</p>
+                <% else %>
+                  <p class="text-muted font-weight-bold">退会(利用停止)</p>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-5"></div>
+    <div class="col-md-4 ml-4 text-center">
+      <%= paginate @users %>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>

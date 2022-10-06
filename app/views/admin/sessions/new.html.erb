@@ -1,0 +1,51 @@
+<%= form_with model: @admin, local: :ture, url: admin_session_path do |f| %>
+  <div class="container">
+    <div class="row my-4">
+      <div class="col-lg-3 mb-3 text-center">
+        <h4 class="text-color">管理者ログイン</h4>
+      </div>
+      <div class="col-lg-9"></div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-2">
+        <%= f.label :email,"メールアドレス" %>
+      </div>
+      <div class="col-lg-8">
+        <%= f.email_field :email, size: 50, class: "rounded", autofocus: true, autocomplete: "email" %>
+      </div>
+    </div>
+    <div class="row mb-4">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-2">
+        <%= f.label :password, "パスワード" %>
+      </div>
+      <div class="col-lg-8">
+        <%= f.password_field :password, size: 50, class: "rounded", autocomplete: "current-password" %>
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-2">
+        <%= f.submit "ログイン", class: "btn btn-primary btn-block" %>
+      </div>
+      <div class="col-lg-6"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-3 my-3">
+        <h4>ゲストログインの方</h4>
+      </div>
+      <div class="col-md-7"></div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-4"></div>
+      <div class="col-md-5">
+        <p>
+          <%= link_to "ゲストログイン（閲覧用）",admins_guest_sign_in_path, method: :post, class: "btn btn-success" %>
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>
+<%= render "admin/shared/links" %>
