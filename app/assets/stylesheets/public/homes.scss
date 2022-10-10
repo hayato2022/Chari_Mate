@@ -1,3 +1,41 @@
 // Place all the styles related to the public/homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.main-visual{
+  background-image: image-url("bicycle2.jpg");
+  height: 320px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  padding-top: 65px;
+}
+
+.main-visual-content{
+  width: 55%;
+  height: 170px;
+  background-color: rgba( 0, 0, 0, 0.5);
+  padding-top: 15px;
+}
+
+@media screen and (max-width: 768px) {
+  .main-visual-content {
+    height: 100%;
+  }
+}
+
+.main-visual-text{
+  font-size: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .main-visual-text {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .main-visual-text {
+    color: fff;
+    font-size: 10px;
+  }
+}
