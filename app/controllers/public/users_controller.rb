@@ -1,6 +1,7 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :sent_user, only: [:show, :edit, :update, :likes]
+  before_action :correct_user, only: [:edit, :update]
 
   def show
     @posts = @user.posts.page(params[:page]).per(9)
@@ -52,4 +53,8 @@ class Public::UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :introduction, :profile_image)
   end
 
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to posts_path unless @user == current_user
+  end
 end

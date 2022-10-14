@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_11_032715) do
+ActiveRecord::Schema.define(version: 2022_10_14_065541) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -56,9 +56,9 @@ ActiveRecord::Schema.define(version: 2022_10_11_032715) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.decimal "mets"
-    t.integer "minute"
-    t.decimal "weight"
+    t.decimal "mets", null: false
+    t.integer "minute", null: false
+    t.decimal "weight", null: false
   end
 
   create_table "likes", force: :cascade do |t|
@@ -106,8 +106,8 @@ ActiveRecord::Schema.define(version: 2022_10_11_032715) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.float "lat"
-    t.float "lng"
+    t.float "lat", null: false
+    t.float "lng", null: false
   end
 
   create_table "relationships", force: :cascade do |t|
