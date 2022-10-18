@@ -18,10 +18,25 @@ users = User.create!(
 
 posts = Post.create!(
   [
-    {body: 'きれい', lat: 35.331592, lng:136.0728135, image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg"),  user_id: users[0].id },
-    {body: '自転車仲間',lat: 35.331592, lng:136.0728135, image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post2.jpg"), filename:"sample-post2.jpg"),  user_id: users[1].id},
-    {body: '桜', lat: 35.32599002244017, lng:135.98612450463867, image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post3.jpg"), filename:"sample-post3.jpg"), user_id: users[2].id }
+    {body: 'とてもきれいなびわ湖', lat: 35.331592, lng:136.0728135, image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpeg"), filename:"sample-post1.jpeg"), user_id: users[0].id },
+    {body: '琵琶湖と貝殻',lat: 35.331592, lng:136.0728135, image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post2.jpeg"), filename:"sample-post2.jpeg"),  user_id: users[1].id},
+    {body: 'のどかな田舎の田んぼ', lat: 35.32599002244017, lng:135.98612450463867, image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post3.jpeg"), filename:"sample-post3.jpeg"), user_id: users[2].id }
   ]
 )
 
+tags = Tag.create!(
+  [
+    {name: '琵琶湖' },
+    {name: '絶景'},
+    {name: '田舎' }
+  ]
+)
+
+PostTag.create!(
+  [
+    {post_id: posts[0].id, tag_id: tags[0].id},
+    {post_id: posts[1].id, tag_id: tags[1].id},
+    {post_id: posts[2].id, tag_id: tags[2].id}
+  ]
+)
 
