@@ -12,7 +12,7 @@ class Public::CaloriesController < ApplicationController
     if @calory.save
       redirect_to calory_path(@calory.id)
     else
-      flash.now[:danger] = '削除に失敗しました'
+      flash.now[:danger] = '計算に失敗しました'
       render :new
     end
   end

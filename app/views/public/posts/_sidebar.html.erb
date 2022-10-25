@@ -3,7 +3,7 @@
       <tr>
         <td>
           <%= link_to posts_path, class: "text-dark" do %>
-            <i class="fas fa-lg fa-home"></i></br>
+            <i class="fas fa-lg fa-home"></i><br>
             <p>投稿一覧</p>
           <% end %>
         </td>
@@ -11,7 +11,7 @@
       <tr>
         <td>
           <%= link_to search_users_path, class: "text-dark" do %>
-            <i class="fas fa-lg fa-search"></i></br>
+            <i class="fas fa-lg fa-search"></i><br>
             <p>ユーザー検索</p>
           <% end %>
         </td>
@@ -19,7 +19,7 @@
       <tr>
         <td>
           <%= link_to new_post_path, class: "text-dark" do %>
-            <i class="fas fa-lg fa-camera"></i></br>
+            <i class="fas fa-lg fa-camera"></i><br>
             <p>投稿する</p>
           <% end %>
         </td>
@@ -27,7 +27,7 @@
       <tr>
         <td>
           <%= link_to likes_user_path(current_user), class: "text-dark" do %>
-            <i class="fas fa-lg fa-heart"></i></br>
+            <i class="fas fa-lg fa-heart"></i><br>
             <p>いいねした投稿</p>
           <% end %>
         </td>
@@ -35,7 +35,7 @@
       <tr>
         <td>
           <%= link_to new_calory_path, class: "text-dark" do %>
-            <i class="fas fa-lg fa-fire"></i></br>
+            <i class="fas fa-lg fa-fire"></i><br>
             <p>消費カロリー計算</p>
           <% end %>
         </td>
@@ -43,7 +43,7 @@
       <tr>
         <td>
           <%= link_to calories_path, class: "text-dark" do %>
-            <i class="fas fa-lg fa-biking"></i></br>
+            <i class="fas fa-lg fa-biking"></i><br>
             <p>消費カロリー一覧</p>
           <% end %>
         </td>
@@ -54,13 +54,13 @@
             <%= link_to notifications_path, class: "text-dark" do %>
               <span class="fa-stack">
                 <i class="far fa-bell fa-lg  fa-stack-1x" style="font-size: 1.5em;"></i>
-                <i class="fas fa-circle fa-lg n-circle fa-stack-1x"></i></br>
+                <i class="fas fa-circle fa-lg n-circle fa-stack-1x"></i><br>
               </span>
               <p>通知</p>
           <% end %>
           <% else %>
             <%= link_to notifications_path, class: "text-dark" do %>
-              <i class="far fa-bell fa-lg" style="font-size: 1.5em;"></i></br>
+              <i class="far fa-bell fa-lg" style="font-size: 1.5em;"></i><br>
               <p>通知</p>
             <% end %>
           <% end %>

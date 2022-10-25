@@ -13,22 +13,22 @@
           </ul>
         <% end %>
         <%= form_with model: post, local: true do |f| %>
-          <%= f.label :image, "・画像を選択" %> </br>
+          <%= f.label :image, "・画像を選択" %> <br>
           <%= f.file_field :image, accept: "image/*", class: "ml-3" %>
 
-          <%= f.label :body, "・本文", class: "mt-2" %></br>
+          <%= f.label :body, "・本文", class: "mt-2" %><br>
           <%= f.text_area :body, size: "35x3", class: "rounded ml-3" %>
 
-          <%= f.label :name, "・タグ「,(カンマ)」で複数追加", class: "mt-2" %></br>
-          <%= f.text_field :name, size: 30, class: "rounded ml-3" %></br>
+          <%= f.label :name, "・タグ「,(カンマ)」で複数追加", class: "mt-2" %><br>
+          <%= f.text_field :name, size: 30, class: "rounded ml-3" %><br>
 
           <div class="row my-3 ml-2">
-            <%= f.label :lat,"緯度" %></br>
-            <%= f.text_field :lat,:value =>"緯度", id: :lat %>
+            <%= f.label :lat,"緯度" %><br>
+            <%= f.text_field :lat, id: :lat %>
           </div>
           <div class="row my-3 ml-2">
             <%= f.label :lng,"経度" %>
-            <%= f.text_field :lng,:value =>"経度", id: :lng %>
+            <%= f.text_field :lng, id: :lng %>
           </div>
           <hr>
           <%= f.submit '投稿', class:"btn btn-lg btn-block btn-info mt-4" %>

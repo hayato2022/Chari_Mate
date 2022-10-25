@@ -34,6 +34,27 @@ en:
 
 ja:
   activerecord:
+    models:
+      user: ユーザー
+      post: 投稿
+      post_comment: コメント
+      calory: カロリー
+    attributes:
+      user:
+        name: ユーザー名
+        email: メールアドレス
+        encrypted_password: パスワード
+        is_active: ユーザーステータス
+        introduction: 自己紹介
+      post:
+        body: 本文
+        image: 画像
+        lat: 緯度
+        lng: 経度
+      calory:
+        mets: メッツ値
+        minute: 時間(分)
+        weight: 体重(kg)
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
